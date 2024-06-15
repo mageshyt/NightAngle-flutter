@@ -1,17 +1,17 @@
 from fastapi import FastAPI
 import uvicorn
+from dotenv import load_dotenv
+
 
 from .routers import auth
 from .dependencies import prisma
 
 app = FastAPI()
 
+load_dotenv()
 
 app.include_router(auth.router)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello Bigger Applications!"}
 
 @app.on_event("startup")
 async def startup():

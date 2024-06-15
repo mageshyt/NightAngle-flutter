@@ -1,4 +1,7 @@
 import bcrypt
+import jwt
+import os
+
 from fastapi import APIRouter, HTTPException, status
 
 from ..dependencies import prisma
@@ -29,15 +32,17 @@ async def login(user: UserLogin):
     """
     Login endpoint for user authentication.
     """
-    is_exist_user = await prisma.user.find_unique(where={"email": user.email})
+    is_exist_user = await prisma.user.find_unique(where={"email": user.email}, )
     if not is_exist_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     if not verify_password(user.password, is_exist_user.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect password")
+    # create a token
+    token=jwt.encode({"id": is_exist_user.id}, os.getenv("JWT_SECRET"))
 
-    # Here you would generate and return a token for the user
-    return {"message": "Login successful"}
+    return {"token": token, "user": is_exist_user}
+
 
 
 @router.post('/register', response_model=UserCreate)
@@ -49,9 +54,10 @@ async def register(user: UserCreate):
     if is_exist_user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already exists")
 
-    hashed_password = bcrypt.hashpw(user.password.encode(), bcrypt.gensalt())
+    hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-    new_user = await prisma.user.create(
+
+    user_db = await prisma.user.create(
         data={
             "name": user.name,
             "email": user.email,
@@ -59,4 +65,3 @@ async def register(user: UserCreate):
         },
     )
 
-    return new_user
