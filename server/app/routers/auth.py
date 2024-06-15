@@ -1,10 +1,12 @@
 import bcrypt
 import jwt
 import os
+from fastapi.security import HTTPBearer
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 
 from ..dependencies import prisma
+from ..middleware.auth_middleware import auth_middleware
 from ..schema.user_login import UserLogin
 from ..schema.user_create import UserCreate
 
@@ -19,13 +21,14 @@ def verify_password(plain_password, hashed_password):
     return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 
-@router.get("/", tags=["Auth"])
-async def read_root():
-    """
-    Root endpoint for authentication.
-    """
-    return {"message": "Hello World"}
+# auth_scheme = HTTPBearer()
 
+@router.get('/me')
+async def me(user=Depends(auth_middleware)):
+    """
+    Me endpoint for user authentication.
+    """
+    return user
 
 @router.post('/login')
 async def login(user: UserLogin):
@@ -39,10 +42,9 @@ async def login(user: UserLogin):
     if not verify_password(user.password, is_exist_user.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect password")
     # create a token
-    token=jwt.encode({"id": is_exist_user.id}, os.getenv("JWT_SECRET"))
+    token = jwt.encode({"id": is_exist_user.id}, os.getenv("JWT_SECRET"), algorithm="HS256")
 
     return {"token": token, "user": is_exist_user}
-
 
 
 @router.post('/register', response_model=UserCreate)
@@ -56,7 +58,6 @@ async def register(user: UserCreate):
 
     hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-
     user_db = await prisma.user.create(
         data={
             "name": user.name,
@@ -65,3 +66,4 @@ async def register(user: UserCreate):
         },
     )
 
+    return user_db
