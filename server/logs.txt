@@ -1,0 +1,33 @@
+INFO:     Will watch for changes in these directories: ['/Volumes/Project-2/programming/App dev/NightAngle/server/app']
+INFO:     Uvicorn running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:     Started reloader process [27578] using WatchFiles
+INFO:     Started server process [27580]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:54788 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54788 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54794 - "GET /auth/items/1?q=test HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'routers/auth.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [27580]
+INFO:     Started server process [27670]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:54818 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54818 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54818 - "POST /auth/login HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'dependencies.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [27670]
+INFO:     Started server process [31119]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [31119]
+INFO:     Stopping reloader process [27578]
