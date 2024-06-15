@@ -1,4 +1,5 @@
-import 'package:client/core/core.dart';
+import 'package:nightAngle/core/core.dart';
+import 'package:nightAngle/core/widgets/button.dart';
 import 'package:flutter/material.dart';
 
 class AuthButton extends StatelessWidget {
@@ -11,20 +12,16 @@ class AuthButton extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: Sizes.buttonHeight + 5,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-          backgroundColor: Pallete.buttonPrimary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Sizes.inputFieldRadius),
-          ),
-          textStyle: const TextStyle(
-            fontSize: Sizes.fontSizeLg,
-            color: Color.fromARGB(255, 0, 0, 0),
+      child: Button(
+        text: buttonText,
+        onPressed: onTap,
+        customStyle: ButtonStyle(
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         ),
-        onPressed: onTap,
-        child: Text(buttonText),
       ),
     );
   }

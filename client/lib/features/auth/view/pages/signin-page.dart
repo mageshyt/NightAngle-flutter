@@ -1,7 +1,7 @@
-import 'package:client/core/constants/constants.dart';
-import 'package:client/core/core.dart';
-import 'package:client/features/auth/view/widgets/auth_button.dart';
-import 'package:client/features/auth/view/widgets/auth_header.dart';
+import 'package:nightAngle/core/constants/constants.dart';
+import 'package:nightAngle/core/core.dart';
+import 'package:nightAngle/features/auth/view/widgets/auth_button.dart';
+import 'package:nightAngle/features/auth/view/widgets/auth_header.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

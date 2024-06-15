@@ -1,6 +1,6 @@
-import 'package:client/core/core.dart';
-import 'package:client/features/auth/view/pages/signup-screen.dart';
-import 'package:client/features/auth/view/pages/signin-page.dart';
+import 'package:nightAngle/core/core.dart';
+import 'package:nightAngle/features/auth/view/pages/signup-screen.dart';
+import 'package:nightAngle/features/auth/view/pages/signin-page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

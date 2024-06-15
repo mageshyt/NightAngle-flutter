@@ -1,12 +1,12 @@
-import 'package:client/features/auth/view/widgets/auth_header.dart';
+import 'package:nightAngle/features/auth/view/widgets/auth_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'package:client/features/auth/view/widgets/auth_button.dart';
+import 'package:nightAngle/features/auth/view/widgets/auth_button.dart';
 import 'package:flutter/gestures.dart';
-import 'package:client/core/core.dart';
+import 'package:nightAngle/core/core.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

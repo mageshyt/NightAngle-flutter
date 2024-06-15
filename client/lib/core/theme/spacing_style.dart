@@ -1,5 +1,5 @@
-import 'package:client/core/constants/constants.dart';
-import 'package:client/core/core.dart';
+import 'package:nightAngle/core/constants/constants.dart';
+import 'package:nightAngle/core/core.dart';
 import 'package:flutter/material.dart';
 
 class SpacingStyle {
