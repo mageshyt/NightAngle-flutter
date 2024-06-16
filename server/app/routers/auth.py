@@ -47,7 +47,7 @@ async def login(user: UserLogin):
     return {"token": token, "user": is_exist_user}
 
 
-@router.post('/register', response_model=UserCreate)
+@router.post('/register',status_code=status.HTTP_201_CREATED)
 async def register(user: UserCreate):
     """
     Register endpoint for creating a new user.
