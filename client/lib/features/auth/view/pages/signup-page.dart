@@ -1,24 +1,25 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:fpdart/fpdart.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nightAngle/core/logger/logger.dart';
-import 'package:nightAngle/features/auth/repositories/auth_remote_repository.dart';
+import 'package:nightAngle/core/widgets/widgets.dart';
+import 'package:nightAngle/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'package:nightAngle/features/auth/view/widgets/auth_header.dart';
-import 'package:nightAngle/features/auth/view/widgets/auth_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:nightAngle/core/core.dart';
 
-class SignUpPage extends StatefulWidget {
+import 'package:nightAngle/features/auth/view/widgets/auth_header.dart';
+import 'package:nightAngle/features/auth/view/widgets/auth_button.dart';
+
+class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
 
   @override
-  createState() => _SignUpPageState();
+  ConsumerState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends ConsumerState<SignUpPage> {
   final form = FormGroup({
     'name': FormControl<String>(
         value: 'Magesh',
@@ -38,6 +39,28 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(authViewModelProvider, (_, next) {
+      next?.when(
+          data: (data) {
+            // show success message
+            showSnackbar(
+                context: context,
+                title: 'Register',
+                message: Texts.registerSuccess,
+                contentType: ContentType.success);
+            // navigate to home page
+            context.goNamed(Routes.home);
+          },
+          error: (err, stack) {
+            showSnackbar(
+                context: context,
+                title: 'Auth',
+                message: err.toString(),
+                contentType: ContentType.failure);
+          },
+          loading: () {});
+    });
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -120,16 +143,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           final email = form.control('email').value;
                           final password = form.control('password').value;
 
-                          // call the register method from the repository
-                          final res = await AuthRemoteRepository().register(
-                              email: email, password: password, name: name);
-
-                          final val = switch (res) {
-                            Left(value: final l) => l,
-                            Right(value: final r) => r,
-                          };
-
-                          LoggerHelper.debug(val.toString());
+                          ref.read(authViewModelProvider.notifier).registerUser(
+                              name: name, email: email, password: password);
                         },
                       ),
 

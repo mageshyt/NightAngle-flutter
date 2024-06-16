@@ -1,24 +1,24 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:fpdart/fpdart.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nightAngle/core/widgets/widgets.dart';
+import 'package:nightAngle/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:nightAngle/core/core.dart';
 
-import 'package:nightAngle/features/auth/repositories/auth_remote_repository.dart';
 import 'package:nightAngle/features/auth/view/widgets/auth_button.dart';
 import 'package:nightAngle/features/auth/view/widgets/auth_header.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends ConsumerStatefulWidget {
   const SignInPage({super.key});
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  ConsumerState<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignInPageState extends ConsumerState<SignInPage> {
   final form = FormGroup({
     'email': FormControl<String>(
         value: 'magesh@gmail.com',
@@ -28,8 +28,30 @@ class _SignInPageState extends State<SignInPage> {
       Validators.pattern(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
     ]),
   });
+
   @override
   Widget build(BuildContext context) {
+    ref.listen(authViewModelProvider, (_, next) {
+      next?.when(
+          data: (data) {
+            // show success message
+            showSnackbar(
+                context: context,
+                title: 'Login',
+                message: Texts.loginSuccess,
+                contentType: ContentType.success);
+            // navigate to home page
+            context.goNamed(Routes.home);
+          },
+          error: (err, stack) {
+            showSnackbar(
+                context: context,
+                title: 'Auth',
+                message: err.toString(),
+                contentType: ContentType.failure);
+          },
+          loading: () {});
+    });
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -84,15 +106,9 @@ class _SignInPageState extends State<SignInPage> {
                         final email = form.control('email').value;
                         final password = form.control('password').value;
 
-                        final res = await AuthRemoteRepository()
-                            .login(email: email, password: password);
-
-                        final val = switch (res) {
-                          Left(value: final l) => l,
-                          Right(value: final r) => r,
-                        };
-
-                        print(val);
+                        ref
+                            .read(authViewModelProvider.notifier)
+                            .loginUser(email: email, password: password);
                       },
                     ),
                     const SizedBox(height: Sizes.spaceBtwItems),

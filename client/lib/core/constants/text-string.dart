@@ -4,11 +4,14 @@ class Texts {
   static const String loginSubTitle =
       "Discover limitless choices and unmatched convenience.";
   static const String dontHaveAccount = "Don’t have an account?";
+  static const String loginSuccess = "Login successful 🎉";
 
   // -------------------------register screen-------------------------
   static const String signupTitle = "Let’s create your account";
   static const String signupSubtitle =
       "Join us and explore endless opportunities.";
+  static const String registerSuccess =
+      "Account created successfully , please login";
 
   static const String forgetPasswordTitle = "Forgot Password";
   static const String alreadyHaveAccount = "Already have an account?";
