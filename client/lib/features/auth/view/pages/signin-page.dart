@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:nightAngle/core/constants/constants.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/features/auth/view/widgets/auth_button.dart';
@@ -77,7 +78,6 @@ class _SignInPageState extends State<SignInPage> {
                       },
                     ),
                     const SizedBox(height: Sizes.spaceBtwItems),
-
                     // ------------- Sign Up --------------
 
                     RichText(
@@ -90,7 +90,7 @@ class _SignInPageState extends State<SignInPage> {
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                // TODO: Navigate to Sign Up Page
+                                context.goNamed(Routes.register);
                               },
                             text: ' Sign Up',
                             style: const TextStyle(
