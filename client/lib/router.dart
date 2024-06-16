@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/features/auth/view/pages/signin-page.dart';
 import 'package:nightAngle/features/auth/view/pages/signup-page.dart';
+import 'package:nightAngle/features/home/view/home-page.dart';
 
 class AppRouter {
   GoRouter router = GoRouter(
@@ -10,9 +11,9 @@ class AppRouter {
     routes: [
       // Define a default route
       GoRoute(
+        name: Routes.home,
         path: '/',
-        pageBuilder: (context, state) =>
-            const MaterialPage(child: SignInPage()),
+        pageBuilder: (context, state) => const MaterialPage(child: HomePage()),
       ),
 
       GoRoute(
