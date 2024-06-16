@@ -6,28 +6,41 @@ import 'package:nightAngle/features/auth/view/pages/signup-page.dart';
 import 'package:nightAngle/features/home/view/home-page.dart';
 
 class AppRouter {
-  GoRouter router = GoRouter(
-    initialLocation: '/login',
-    routes: [
-      // Define a default route
-      GoRoute(
-        name: Routes.home,
-        path: '/',
-        pageBuilder: (context, state) => const MaterialPage(child: HomePage()),
-      ),
+  static GoRouter returnRouter(bool isAuth) {
+    GoRouter router = GoRouter(
+      initialLocation: '/login',
+      routes: [
+        // Define a default route p
+        GoRoute(
+          name: Routes.home,
+          path: '/',
+          pageBuilder: (context, state) =>
+              const MaterialPage(child: HomePage()),
+        ),
 
-      GoRoute(
-        name: Routes.login,
-        path: '/login',
-        pageBuilder: (context, state) =>
-            const MaterialPage(child: SignInPage()),
-      ),
+        GoRoute(
+          name: Routes.login,
+          path: '/login',
+          pageBuilder: (context, state) =>
+              const MaterialPage(child: SignInPage()),
+        ),
 
-      GoRoute(
+        GoRoute(
           name: Routes.register,
           path: '/register',
-          pageBuilder: (context, state) =>
-              const MaterialPage(child: SignUpPage())),
-    ],
-  );
+          pageBuilder: (context, state) => const MaterialPage(
+            child: SignUpPage(),
+          ),
+        ),
+      ],
+      redirect: (context, state) {
+        if (isAuth) {
+          return '/';
+        }
+        return '/login';
+      },
+    );
+
+    return router;
+  }
 }
