@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 enum DioMethod { post, get, put, delete }
 
@@ -17,12 +15,14 @@ class APIService {
     Map<String, dynamic>? param,
     String? contentType,
     formData,
+    Map<String,String>? headers
   }) async {
     try {
       final dio = Dio(
         BaseOptions(
           baseUrl: baseUrl,
           contentType: contentType ?? Headers.formUrlEncodedContentType,
+          headers: headers
         ),
       );
       switch (method) {

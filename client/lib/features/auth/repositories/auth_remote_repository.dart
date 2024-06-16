@@ -4,6 +4,14 @@ import 'package:nightAngle/core/http/failure.dart';
 import 'package:nightAngle/core/logger/logger.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:nightAngle/features/auth/model/user-model.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'auth_remote_repository.g.dart';
+
+@riverpod
+AuthRemoteRepository authRemoteRepository(AuthRemoteRepositoryRef ref) {
+  return AuthRemoteRepository();
+}
 
 class AuthRemoteRepository {
   Future<Either<HttpFailure, UserModel>> login(
@@ -32,7 +40,7 @@ class AuthRemoteRepository {
 
       return Right(user.copyWith(token: response.data['token']));
     } catch (e) {
-      if (e is DioError) {
+      if (e is DioException) {
         LoggerHelper.error(e.response.toString());
         return Left(HttpFailure(
             message: e.response!.data['detail'],
@@ -68,6 +76,32 @@ class AuthRemoteRepository {
       }
 
       return Right(UserModel.fromMap(response.data));
+    } catch (e) {
+      if (e is DioException) {
+        LoggerHelper.error(e.response.toString());
+        return Left(HttpFailure(
+            message: e.response!.data['detail'],
+            code: e.response!.statusCode.toString()));
+      }
+
+      return Left(HttpFailure(message: e.toString(), code: '500'));
+    }
+  }
+
+  Future<Either<HttpFailure, UserModel>> getCurrentUser(String token) async {
+    try {
+      final response = await APIService.instance
+          .request('/auth/me', DioMethod.get, headers: {'x-auth-token': token});
+
+      if (response.statusCode != 200) {
+        return Left(HttpFailure(
+          message: response.data['detail'],
+          code: response.statusCode.toString(),
+        ));
+      }
+      final UserModel user = UserModel.fromMap(response.data);
+
+      return Right(user.copyWith(token: token));
     } catch (e) {
       if (e is DioException) {
         LoggerHelper.error(e.response.toString());
