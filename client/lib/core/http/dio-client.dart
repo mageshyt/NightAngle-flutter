@@ -1,88 +1,59 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
-class DioClient {
-  static final DioClient _instance = DioClient._internal();
-  final Dio _dio;
+enum DioMethod { post, get, put, delete }
 
-  // Private constructor
-  DioClient._internal()
-      : _dio = Dio(
-          BaseOptions(
-            baseUrl: 'http://localhost:8000',
-            headers: {
-              'Accept': 'application/json',
-            },
-          ),
-        );
+class APIService {
+  APIService._singleton();
 
-  // Factory constructor to return the singleton instance
-  factory DioClient() {
-    return _instance;
-  }
+  static final APIService instance = APIService._singleton();
 
-  // GET request
-  Future get(String path) async {
+  String baseUrl = 'http://localhost:8000';
+
+  Future<Response> request(
+    String endpoint,
+    DioMethod method, {
+    Map<String, dynamic>? param,
+    String? contentType,
+    formData,
+  }) async {
     try {
-      final response = await _dio.get(path);
-      return response.data;
-    } on DioError catch (e) {
-      return _handleDioError(e);
-    } on SocketException {
-      return 'No Internet connection';
+      final dio = Dio(
+        BaseOptions(
+          baseUrl: baseUrl,
+          contentType: contentType ?? Headers.formUrlEncodedContentType,
+        ),
+      );
+      switch (method) {
+        case DioMethod.post:
+          return dio.post(
+            endpoint,
+            data: param ?? formData,
+          );
+        case DioMethod.get:
+          return dio.get(
+            endpoint,
+            queryParameters: param,
+          );
+        case DioMethod.put:
+          return dio.put(
+            endpoint,
+            data: param ?? formData,
+          );
+        case DioMethod.delete:
+          return dio.delete(
+            endpoint,
+            data: param ?? formData,
+          );
+        default:
+          return dio.post(
+            endpoint,
+            data: param ?? formData,
+          );
+      }
     } catch (e) {
-      return 'Unexpected error: $e';
-    }
-  }
-
-  // POST request
-  Future post(String path, dynamic data) async {
-    try {
-      final response = await _dio.post(path, data: data);
-      return response.data;
-    } on DioError catch (e) {
-      return _handleDioError(e);
-    } on SocketException {
-      return 'No Internet connection';
-    } catch (e) {
-      return 'Unexpected error: $e';
-    }
-  }
-
-  // PUT request
-  Future put(String path, dynamic data) async {
-    try {
-      final response = await _dio.put(path, data: data);
-      return response.data;
-    } on DioError catch (e) {
-      return _handleDioError(e);
-    } on SocketException {
-      return 'No Internet connection';
-    } catch (e) {
-      return 'Unexpected error: $e';
-    }
-  }
-
-  // DELETE request
-  Future delete(String path) async {
-    try {
-      final response = await _dio.delete(path);
-      return response.data;
-    } on DioError catch (e) {
-      return _handleDioError(e);
-    } on SocketException {
-      return 'No Internet connection';
-    } catch (e) {
-      return 'Unexpected error: $e';
-    }
-  }
-
-  // Handle Dio errors
-  dynamic _handleDioError(DioError e) {
-    if (e.response != null) {
-      return e.response!.data;
-    } else {
-      return e.message;
+      throw Exception('Network error');
     }
   }
 }
