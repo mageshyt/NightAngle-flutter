@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nightAngle/core/logger/logger.dart';
+import 'package:nightAngle/features/auth/repositories/auth_remote_repository.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import 'package:nightAngle/features/auth/view/widgets/auth_header.dart';
@@ -18,11 +21,13 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final form = FormGroup({
     'name': FormControl<String>(
-        value: '', validators: [Validators.required, Validators.minLength(3)]),
+        value: 'Magesh',
+        validators: [Validators.required, Validators.minLength(3)]),
     'email': FormControl<String>(
-        value: '', validators: [Validators.email, Validators.required]),
+        value: 'magesh@gmail.com',
+        validators: [Validators.email, Validators.required]),
     'password': FormControl<String>(
-      value: '',
+      value: 'Password@',
       validators: [
         Validators.required,
         Validators.minLength(6),
@@ -104,10 +109,27 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       AuthButton(
                         buttonText: 'Sign Up',
-                        onTap: () {
-                          if (form.valid) {
-                            print(form.value);
+                        onTap: () async {
+                          // if not valid, stop
+                          if (!form.valid) {
+                            form.markAllAsTouched();
+                            return;
                           }
+
+                          final name = form.control('name').value;
+                          final email = form.control('email').value;
+                          final password = form.control('password').value;
+
+                          // call the register method from the repository
+                          final res = await AuthRemoteRepository().register(
+                              email: email, password: password, name: name);
+
+                          final val = switch (res) {
+                            Left(value: final l) => l,
+                            Right(value: final r) => r,
+                          };
+
+                          LoggerHelper.debug(val.toString());
                         },
                       ),
 

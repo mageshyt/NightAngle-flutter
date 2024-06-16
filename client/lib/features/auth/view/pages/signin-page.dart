@@ -1,12 +1,15 @@
-import 'package:go_router/go_router.dart';
-import 'package:nightAngle/core/constants/constants.dart';
-import 'package:nightAngle/core/core.dart';
-import 'package:nightAngle/features/auth/view/widgets/auth_button.dart';
-import 'package:nightAngle/features/auth/view/widgets/auth_header.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:fpdart/fpdart.dart';
 
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:nightAngle/core/core.dart';
+
+import 'package:nightAngle/features/auth/repositories/auth_remote_repository.dart';
+import 'package:nightAngle/features/auth/view/widgets/auth_button.dart';
+import 'package:nightAngle/features/auth/view/widgets/auth_header.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -18,8 +21,9 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final form = FormGroup({
     'email': FormControl<String>(
-        value: '', validators: [Validators.required, Validators.email]),
-    'password': FormControl<String>(value: '', validators: [
+        value: 'magesh@gmail.com',
+        validators: [Validators.required, Validators.email]),
+    'password': FormControl<String>(value: 'Password@123', validators: [
       Validators.required,
       Validators.pattern(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
     ]),
@@ -71,10 +75,24 @@ class _SignInPageState extends State<SignInPage> {
                     const SizedBox(height: Sizes.spaceBtwItems),
                     AuthButton(
                       buttonText: 'Login',
-                      onTap: () {
-                        if (form.valid) {
-                          print(form.value);
+                      onTap: () async {
+                        // if not valid, stop
+                        if (!form.valid) {
+                          form.markAllAsTouched();
+                          return;
                         }
+                        final email = form.control('email').value;
+                        final password = form.control('password').value;
+
+                        final res = await AuthRemoteRepository()
+                            .login(email: email, password: password);
+
+                        final val = switch (res) {
+                          Left(value: final l) => l,
+                          Right(value: final r) => r,
+                        };
+
+                        print(val);
                       },
                     ),
                     const SizedBox(height: Sizes.spaceBtwItems),
