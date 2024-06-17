@@ -79,8 +79,8 @@ class AuthViewModel extends _$AuthViewModel {
           AsyncValue.error(l.message, StackTrace.current),
       Right(value: final r) => _getDataSuccess(r),
     };
-
-    return val.value;
+    LoggerHelper.debug(ref.read(currentUserNotifierProvider).toString());
+    return val.hasError ? null : val.value;
   }
 
   AsyncValue<UserModel> _getDataSuccess(UserModel user) {
