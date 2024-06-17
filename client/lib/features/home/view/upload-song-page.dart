@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightAngle/core/core.dart';
+import 'package:nightAngle/core/theme/border-style.dart';
 import 'package:nightAngle/core/widgets/button.dart';
+import 'package:nightAngle/features/home/view/widgets/audio-wave.dart';
 import 'package:nightAngle/features/home/view/widgets/thumbnail-picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:flutter_media_metadata/flutter_media_metadata.dart';
 
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:reactive_image_picker/reactive_image_picker.dart';
@@ -33,7 +38,11 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
     ], validators: [
       Validators.required
     ]),
-    'song': FormControl<MultiFile<Never>>(validators: [Validators.required]),
+    'song': FormControl<MultiFile<String>>(
+        value: const MultiFile<String>(
+          platformFiles: [],
+        ),
+        validators: [Validators.required]),
     'color': FormControl<Color>(
         value: Pallete.primary, validators: [Validators.required]),
   });
@@ -64,34 +73,43 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
 
                       // ---------------------------------------song---------------------------
                       const SizedBox(height: Sizes.spaceBtwItems),
-                      Container(
-                        constraints:
-                            const BoxConstraints(minHeight: 0, maxHeight: 300),
-                        child: ReactiveFilePicker(
-                            formControlName: 'song',
-                            lockParentWindow: true,
-                            allowMultiple: false,
-                            allowedExtensions: const [
-                              'wav',
-                              'aiff',
-                              'alac',
-                              'flac',
-                              'mp3',
-                              'aac',
-                              'wma',
-                              'ogg'
-                            ],
-                            filePickerBuilder: (pickImage, files, onChange) {
-                              return Column(
+                      ReactiveFilePicker<String>(
+                        decoration: BorderStyles.emptyBorder,
+                        formControlName: 'song',
+                        allowMultiple: false,
+                        filePickerBuilder: (pickAudio, files, onChange) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // ---------------------------------------preview---------------------------
+
+                              files.platformFiles.isNotEmpty
+                                  ? AudioWave(
+                                      path: files.platformFiles.first.path
+                                          .toString(),
+                                    )
+                                  : const SizedBox(),
+
+                              // select and remove button
+                              Row(
                                 children: [
+                                  // ---------------------------------------Select Button---------------------------
                                   Button(
-                                    onPressed: pickImage,
-                                    text: 'Pick Song',
-                                    icon: const Icon(Icons.music_note),
+                                    variant: ButtonVariant.secondary,
+                                    onPressed: pickAudio,
+                                    label: const Text('Select Song'),
+                                    icon: const Icon(
+                                      Icons.music_note,
+                                      color: Pallete.black,
+                                    ),
                                   ),
+                                  const SizedBox(width: Sizes.spaceBtwItems),
+                                  // ---------------------------------------Remove Button---------------------------
                                 ],
-                              );
-                            }),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                       // ---------------------------------------Artist---------------------------
                       const SizedBox(height: Sizes.spaceBtwItems),
@@ -128,8 +146,16 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
                         width: double.infinity,
                         child: Button(
                           variant: ButtonVariant.secondary,
-                          onPressed: () {
-                            LoggerHelper.debug(form.value.toString());
+                          onPressed: () async {
+                            final files =
+                                form.control('song').value as MultiFile<String>;
+                            LoggerHelper.debug(
+                                files.platformFiles.first.path.toString());
+                            final metadata = await MetadataRetriever.fromFile(
+                              File(files.platformFiles.first.path.toString()),
+                            );
+
+                            LoggerHelper.info(metadata.toString());
                           },
                           text: 'Upload',
                           icon: const Icon(
