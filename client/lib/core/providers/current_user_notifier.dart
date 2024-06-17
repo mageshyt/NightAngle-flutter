@@ -1,4 +1,3 @@
-import 'package:nightAngle/core/logger/logger.dart';
 import 'package:nightAngle/features/auth/model/user-model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

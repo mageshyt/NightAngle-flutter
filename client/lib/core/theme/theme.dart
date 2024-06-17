@@ -1,25 +1,24 @@
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:nightAngle/core/theme/border-style.dart';
+import 'package:nightAngle/core/theme/test-style.dart';
 
 class AppTheme {
   static final darkThemeMode = ThemeData.dark().copyWith(
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Pallete.backgroundColor,
+      elevation: 0,
+      iconTheme: IconThemeData(color: Pallete.white),
+    ),
     scaffoldBackgroundColor: Pallete.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(Sizes.inputFieldRadius),
-        borderSide: const BorderSide(color: Pallete.borderColor, width: 3),
-      ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(Sizes.inputFieldRadius),
-        borderSide: const BorderSide(color: Pallete.borderColor, width: 3),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(Sizes.inputFieldRadius),
-        borderSide: const BorderSide(color: Pallete.primary, width: 3),
-      ),
-      labelStyle: const TextStyle(color: Pallete.white),
+      border: BorderStyles.outlineInputBorder,
+      enabledBorder: BorderStyles.outlineInputBorderEnabled,
+      focusedBorder: BorderStyles.outlineInputBorderFocused,
+      errorBorder: BorderStyles.outlineErrorBorder,
+      hintStyle: TextStyles.labelStyle,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Pallete.cardColor,

@@ -1,4 +1,7 @@
 class Texts {
+  // validation messages
+  static const String thumbnailRequired = "Thumbnail is required";
+
   // -------------------------login screen-------------------------
   static const String loginTitle = "Welcome back,";
   static const String loginSubTitle =
@@ -23,4 +26,9 @@ class Texts {
   // -------------------------forget password screen-------------------------
   static const String forgetPasswordSubTitle =
       "Don’t worry, it happens! Enter your email and we will send you a password reset link.";
+
+  // -------------------------home screen-------------------------
+
+  // -------------------------upload screen-------------------------
+  static const String uploadThumbnail = "Select the thumbnail for your song";
 }

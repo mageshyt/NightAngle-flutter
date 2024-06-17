@@ -12,6 +12,7 @@ class Sizes {
   static const double iconMd = 26.0;
   static const double iconLg = 32.0;
   static const double iconXl = 48.0;
+  static const double iconDefault = 20.0;
 
   //Avatar sizes
   static const double avatarSm = 24.0;
@@ -36,11 +37,9 @@ class Sizes {
   // AppBar height
   static const double appBarHeight = 56.0;
 
-  // Image sizes
-  static const double roomimageSize = 300.0;
-
   // Default spacing between sections
   static const double defaultSpace = 24.0;
+  static const double containerSpace = 24.0;
   static const double spaceBtwItems = 16.0;
   static const double spaceBtwSmallItems = 10.0;
   static const double spaceBtwSections = 32.0;
@@ -59,7 +58,7 @@ class Sizes {
   static const double productItemHeight = 160.0;
 
   // Input field
-  static const double inputFieldRadius = 12.0;
+  static const double inputFieldRadius = 4.0;
   static const double spaceBtwInputFields = 16.0;
 
   // Card sizes

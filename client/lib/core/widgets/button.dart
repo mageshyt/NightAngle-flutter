@@ -71,68 +71,66 @@ class Button extends StatelessWidget {
 
   ButtonStyle _getButtonStyle(BuildContext context) {
     final baseStyle = ButtonStyle(
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Sizes.borderRadiusSm),
         ),
       ),
-      textStyle: MaterialStateProperty.all<TextStyle>(
+      textStyle: WidgetStateProperty.all<TextStyle>(
         TextStyle(
           fontSize: _getFontSize(size),
         ),
       ),
-      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(_getPadding(size)),
+      padding: WidgetStateProperty.all<EdgeInsetsGeometry>(_getPadding(size)),
     ).merge(customStyle);
 
     switch (variant) {
       case ButtonVariant.defaultVariant:
         return baseStyle.copyWith(
           backgroundColor:
-              MaterialStateProperty.all<Color>(Pallete.buttonPrimary),
-          foregroundColor: MaterialStateProperty.all<Color>(Pallete.white),
-          overlayColor: MaterialStateProperty.all<Color>(
-              Pallete.primary.withOpacity(0.8)),
+              WidgetStateProperty.all<Color>(Pallete.buttonPrimary),
+          foregroundColor: WidgetStateProperty.all<Color>(Pallete.white),
+          overlayColor:
+              WidgetStateProperty.all<Color>(Pallete.primary.withOpacity(0.8)),
         );
       case ButtonVariant.destructive:
         return baseStyle.copyWith(
-          backgroundColor: MaterialStateProperty.all<Color>(Pallete.error),
-          foregroundColor: MaterialStateProperty.all<Color>(Pallete.white),
+          backgroundColor: WidgetStateProperty.all<Color>(Pallete.error),
+          foregroundColor: WidgetStateProperty.all<Color>(Pallete.white),
           overlayColor:
-              MaterialStateProperty.all<Color>(Pallete.error.withOpacity(0.8)),
+              WidgetStateProperty.all<Color>(Pallete.error.withOpacity(0.8)),
         );
       case ButtonVariant.outline:
         return baseStyle.copyWith(
-          backgroundColor: MaterialStateProperty.all<Color>(Pallete.white),
+          backgroundColor: WidgetStateProperty.all<Color>(Pallete.white),
           foregroundColor:
-              MaterialStateProperty.all<Color>(Pallete.backgroundColor),
-          side: MaterialStateProperty.all<BorderSide>(
+              WidgetStateProperty.all<Color>(Pallete.backgroundColor),
+          side: WidgetStateProperty.all<BorderSide>(
               BorderSide(color: Pallete.backgroundColor)),
-          overlayColor: MaterialStateProperty.all<Color>(
-              Pallete.darkGrey.withOpacity(0.2)),
-          elevation: MaterialStateProperty.all<double>(0),
+          overlayColor:
+              WidgetStateProperty.all<Color>(Pallete.darkGrey.withOpacity(0.2)),
+          elevation: WidgetStateProperty.all<double>(0),
         );
       case ButtonVariant.secondary:
         return baseStyle.copyWith(
-          backgroundColor: MaterialStateProperty.all<Color>(Pallete.black),
-          foregroundColor: MaterialStateProperty.all<Color>(Pallete.white),
-          overlayColor: MaterialStateProperty.all<Color>(
-              Pallete.darkGrey.withOpacity(0.8)),
+          backgroundColor: WidgetStateProperty.all<Color>(Pallete.white),
+          foregroundColor: WidgetStateProperty.all<Color>(Pallete.black),
+          overlayColor:
+              WidgetStateProperty.all<Color>(Pallete.darkGrey.withOpacity(0.8)),
         );
       case ButtonVariant.ghost:
         return baseStyle.copyWith(
-          backgroundColor:
-              MaterialStateProperty.all<Color>(Pallete.transparent),
-          foregroundColor: MaterialStateProperty.all<Color>(Pallete.white),
-          elevation: MaterialStateProperty.all<double>(0),
-          overlayColor: MaterialStateProperty.all<Color>(Pallete.textPrimary),
+          backgroundColor: WidgetStateProperty.all<Color>(Pallete.transparent),
+          foregroundColor: WidgetStateProperty.all<Color>(Pallete.white),
+          elevation: WidgetStateProperty.all<double>(0),
+          overlayColor: WidgetStateProperty.all<Color>(Pallete.textPrimary),
         );
       case ButtonVariant.link:
         return baseStyle.copyWith(
-          backgroundColor:
-              MaterialStateProperty.all<Color>(Pallete.transparent),
-          foregroundColor: MaterialStateProperty.all<Color>(Pallete.primary),
-          overlayColor: MaterialStateProperty.all<Color>(
-              Pallete.primary.withOpacity(0.2)),
+          backgroundColor: WidgetStateProperty.all<Color>(Pallete.transparent),
+          foregroundColor: WidgetStateProperty.all<Color>(Pallete.primary),
+          overlayColor:
+              WidgetStateProperty.all<Color>(Pallete.primary.withOpacity(0.2)),
         );
       default:
         return baseStyle;

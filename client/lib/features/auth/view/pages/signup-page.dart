@@ -1,10 +1,12 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:nightAngle/core/widgets/widgets.dart';
 import 'package:nightAngle/features/auth/viewmodel/auth_viewmodel.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:nightAngle/core/core.dart';

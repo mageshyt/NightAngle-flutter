@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:reactive_file_picker/reactive_file_picker.dart';
+import 'package:app_settings/app_settings.dart';
+
+void pickAudio() async {
+  try {
+    final filePickerRes =
+        await FilePicker.platform.pickFiles(type: FileType.audio);
+  } catch (e) {}
+}
+
+Future<void> photoDenied(BuildContext context) async => await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Photo access required'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  'Open settings to allow access',
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('Settings'),
+              onPressed: () async {
+                await AppSettings.openAppSettings();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );

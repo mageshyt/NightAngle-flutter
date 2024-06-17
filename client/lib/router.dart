@@ -4,6 +4,7 @@ import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/features/auth/view/pages/signin-page.dart';
 import 'package:nightAngle/features/auth/view/pages/signup-page.dart';
 import 'package:nightAngle/features/home/view/home-page.dart';
+import 'package:nightAngle/features/home/view/upload-song-page.dart';
 
 class AppRouter {
   static GoRouter returnRouter(bool isAuth) {
@@ -32,10 +33,18 @@ class AppRouter {
             child: SignUpPage(),
           ),
         ),
+
+        GoRoute(
+          name: Routes.upload,
+          path: '/upload',
+          pageBuilder: (context, state) => const MaterialPage(
+            child: UploadSongPage(),
+          ),
+        )
       ],
       redirect: (context, state) {
         if (isAuth) {
-          return '/';
+          return '/upload';
         }
         return '/login';
       },
