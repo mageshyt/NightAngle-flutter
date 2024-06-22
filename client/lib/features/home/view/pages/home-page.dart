@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightAngle/core/core.dart';
-import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:nightAngle/features/home/view/pages/library-page.dart';
 import 'package:nightAngle/features/home/view/pages/search-page.dart';
 import 'package:nightAngle/features/home/view/pages/songs-page.dart';
@@ -21,7 +21,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   final pages = const [SongsPage(), SearchPage(), LibraryPage()];
   @override
   Widget build(BuildContext context) {
-    final user = ref.read(currentUserNotifierProvider);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: [

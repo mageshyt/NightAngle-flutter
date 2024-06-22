@@ -3,10 +3,20 @@ import 'dart:ui';
 
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:nightAngle/features/home/models/song-model.dart';
 import 'package:nightAngle/features/home/repositories/home_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_viewmodel.g.dart';
+
+@riverpod
+Future<List<SongModel>> getAllSongs(GetAllSongsRef ref) async {
+  final res = await ref.read(homeRepositoryProvider).getSongs();
+  return switch (res) {
+    Left(value: final l) => throw l.message,
+    Right(value: final r) => r,
+  };
+}
 
 @riverpod
 class HomeViewModel extends _$HomeViewModel {

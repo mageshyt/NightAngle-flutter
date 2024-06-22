@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/http/failure.dart';
+import 'package:nightAngle/features/home/models/song-model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_repository.g.dart';
@@ -45,6 +46,32 @@ class HomeRepository {
             code: res.statusCode.toString()));
       }
     } catch (e) {
+      return Left(HttpFailure(message: e.toString()));
+    }
+  }
+
+  Future<Either<HttpFailure, List<SongModel>>> getSongs() async {
+    try {
+      final res = await APIService.instance.request(
+        '/song/',
+        DioMethod.get,
+      );
+
+      if (res.statusCode == 200) {
+        final List<SongModel> songs = [];
+        for (var song in res.data['songs']) {
+          LoggerHelper.debug('[GET ALL SONGS]${song['song_name']}');
+          songs.add(SongModel.fromMap(song));
+        }
+        LoggerHelper.debug('[GET ALL SONGS LENGTH]' + songs.length.toString());
+        return Right(songs);
+      } else {
+        return Left(HttpFailure(
+            message: res.data['details'] ?? "something went wrong",
+            code: res.statusCode.toString()));
+      }
+    } catch (e) {
+      LoggerHelper.error('[GET ALL SONGS ERROR]' + e.toString());
       return Left(HttpFailure(message: e.toString()));
     }
   }

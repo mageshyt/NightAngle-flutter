@@ -398,6 +398,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flutter_glow:
+    dependency: "direct main"
+    description:
+      name: flutter_glow
+      sha256: "158f041ddbc18f199dcfd9375d40b983a2bf887752598cdf7b41ac6ff36362bf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
   flutter_iconly:
     dependency: "direct main"
     description:
@@ -541,6 +549,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.2.0"
+  google_fonts:
+    dependency: "direct main"
+    description:
+      name: google_fonts
+      sha256: b1ac0fe2832c9cc95e5e88b57d627c5e68c223b9657f4b96e1487aa9098c7b82
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.1"
   graphs:
     dependency: transitive
     description:

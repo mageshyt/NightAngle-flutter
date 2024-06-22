@@ -27,9 +27,11 @@ class MyApp extends ConsumerWidget {
     LoggerHelper.debug(currentUser.toString());
 
     return MaterialApp.router(
+      
       debugShowCheckedModeBanner: false,
       title: 'Night Angle',
       theme: AppTheme.darkThemeMode,
+
       routerConfig: AppRouter.returnRouter(
         currentUser != null,
       ),

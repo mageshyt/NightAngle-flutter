@@ -3,6 +3,7 @@ import 'package:nightAngle/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:nightAngle/core/theme/border-style.dart';
 import 'package:nightAngle/core/theme/text-style.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static final darkThemeMode = ThemeData.dark().copyWith(
@@ -11,6 +12,7 @@ class AppTheme {
       elevation: 0,
       iconTheme: IconThemeData(color: Pallete.white),
     ),
+    textTheme: GoogleFonts.poppinsTextTheme(),
     scaffoldBackgroundColor: Pallete.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
       floatingLabelBehavior: FloatingLabelBehavior.never,
