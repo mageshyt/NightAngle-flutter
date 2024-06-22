@@ -31,4 +31,5 @@ class Texts {
 
   // -------------------------upload screen-------------------------
   static const String uploadThumbnail = "Select the thumbnail for your song";
+  
 }

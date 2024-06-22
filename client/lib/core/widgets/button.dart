@@ -102,11 +102,11 @@ class Button extends StatelessWidget {
         );
       case ButtonVariant.outline:
         return baseStyle.copyWith(
-          backgroundColor: WidgetStateProperty.all<Color>(Pallete.white),
+          backgroundColor: WidgetStateProperty.all<Color>(Pallete.transparent),
           foregroundColor:
               WidgetStateProperty.all<Color>(Pallete.backgroundColor),
           side: WidgetStateProperty.all<BorderSide>(
-              BorderSide(color: Pallete.backgroundColor)),
+              BorderSide(color: Pallete.white)),
           overlayColor:
               WidgetStateProperty.all<Color>(Pallete.darkGrey.withOpacity(0.2)),
           elevation: WidgetStateProperty.all<double>(0),

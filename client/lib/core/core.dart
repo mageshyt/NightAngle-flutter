@@ -8,3 +8,4 @@ export 'http/dio-client.dart';
 export 'utils/utils.dart';
 export 'localstorage/storage_utility.dart';
 export 'logger/logger.dart';
+export 'widgets/widgets.dart';

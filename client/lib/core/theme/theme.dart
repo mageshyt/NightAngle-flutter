@@ -2,7 +2,7 @@ import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:nightAngle/core/theme/border-style.dart';
-import 'package:nightAngle/core/theme/test-style.dart';
+import 'package:nightAngle/core/theme/text-style.dart';
 
 class AppTheme {
   static final darkThemeMode = ThemeData.dark().copyWith(

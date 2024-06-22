@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:reactive_file_picker/reactive_file_picker.dart';
 import 'package:app_settings/app_settings.dart';
 
+String rgbToHex(Color color) {
+  return '#${color.red.toRadixString(16).padLeft(2, '0')}';
+}
+
 void pickAudio() async {
   try {
     final filePickerRes =
