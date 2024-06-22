@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/theme/border-style.dart';
-import 'package:nightAngle/core/theme/test-style.dart';
+import 'package:nightAngle/core/theme/text-style.dart';
 import 'package:nightAngle/core/widgets/button.dart';
 import 'package:reactive_file_picker/reactive_file_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -30,7 +30,8 @@ class ThumbnailPicker extends StatelessWidget {
       ],
       decoration: BorderStyles.emptyBorder,
       validationMessages: {
-        'required': (err) =>  Texts.thumbnailRequired,
+        'required': (err) => Texts.thumbnailRequired,
+        'minLength': (err) => Texts.thumbnailRequired,
       },
       preprocessError: (e) async {
         if (e is PlatformException) {
