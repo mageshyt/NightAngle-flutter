@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/features/auth/view/pages/signin-page.dart';
 import 'package:nightAngle/features/auth/view/pages/signup-page.dart';
-import 'package:nightAngle/features/home/view/home-page.dart';
-import 'package:nightAngle/features/home/view/upload-song-page.dart';
+import 'package:nightAngle/features/home/view/pages/home-page.dart';
+import 'package:nightAngle/features/home/view/pages/upload-song-page.dart';
 
 class AppRouter {
   static GoRouter returnRouter(bool isAuth) {
@@ -44,7 +44,7 @@ class AppRouter {
       ],
       redirect: (context, state) {
         if (isAuth) {
-          return '/upload';
+          return '/';
         }
         return '/login';
       },

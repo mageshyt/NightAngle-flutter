@@ -21,9 +21,11 @@ class AppTheme {
       hintStyle: TextStyles.labelStyle,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Pallete.cardColor,
-      selectedItemColor: Pallete.greenColor,
+      backgroundColor: Pallete.backgroundColor,
+      selectedItemColor: Pallete.primary,
       unselectedItemColor: Pallete.inactiveBottomBarItemColor,
+      elevation: 0,
+      enableFeedback: false,
     ),
   );
 }

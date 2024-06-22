@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:nightAngle/core/logger/logger.dart';
 import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:nightAngle/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:nightAngle/router.dart';
