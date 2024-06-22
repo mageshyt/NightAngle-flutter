@@ -14,13 +14,13 @@ async def auth_middleware(x_auth_token=Header()):
         print(">>", os.getenv('JWT_SECRET'))
         verified_token = jwt.decode(x_auth_token, os.getenv('JWT_SECRET'), ['HS256'])
 
-        print(">>",verified_token)
+        print(">>", verified_token)
         if not verified_token:
             raise HTTPException(401, 'Token verification failed, authorization denied!')
         # get the id from the token
         uid = verified_token.get('id')
         # get the user from the database
-        user = await prisma.user.find_unique(where={'id': uid},)
+        user = await prisma.user.find_unique(where={'id': uid}, include={'songs': True})
         if not user:
             raise HTTPException(401, 'User not found, authorization denied!')
         # remove the password from the user

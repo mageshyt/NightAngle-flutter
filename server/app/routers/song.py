@@ -29,6 +29,17 @@ async def get_songs():
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
+@router.post('/upload')
+async def create_song(song: UploadFile = File(...),
+                      artist: str = Form(...),
+                      song_name: str = Form(...),
+                      hex_color: str = Form(...),
+                      auth_user=Depends(auth_middleware)):
+
+    print(auth_user.id)
+
+    return  {"message":"upload"}
+
 
 @router.get('/{song_id}')
 async def get_song(song_id: str):
@@ -47,7 +58,7 @@ async def get_song(song_id: str):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
 
-@router.post('/')
+@router.post('/', status_code=status.HTTP_201_CREATED)
 async def create_song(song: UploadFile = File(...),
                       thumbnail: UploadFile = File(...),
                       artist: str = Form(...),
@@ -59,6 +70,7 @@ async def create_song(song: UploadFile = File(...),
     """
     try:
         # upload image
+        print(thumbnail.filename)
         songId = str(uuid.uuid4())
         thumbnail_url = upload_image(thumbnail.file, songId)
         song_url = upload_audio(song.file, songId)
@@ -71,14 +83,17 @@ async def create_song(song: UploadFile = File(...),
                 "hex_color": hex_color,
                 "thumbnail_url": thumbnail_url["url"],
                 "song_url": song_url["url"],
-                   "userId":auth_user.id
+                "user":{
+                    "connect": {"id": auth_user.id}
+                }
             }
         )
 
         return { "song": _song}
 
     except Exception as e:
-        raise HTTPException(status_code=status.HTTP_201_CREATED, detail=str(e))
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+
 
 
 @router.delete('/{song_id}')

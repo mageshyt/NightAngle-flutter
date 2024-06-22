@@ -3,7 +3,8 @@ import uvicorn
 from dotenv import load_dotenv
 
 
-from .routers import auth
+from .routers import auth, song
+
 from .dependencies import prisma
 
 app = FastAPI()
@@ -11,6 +12,7 @@ app = FastAPI()
 load_dotenv()
 
 app.include_router(auth.router)
+app.include_router(song.router)
 
 
 @app.on_event("startup")

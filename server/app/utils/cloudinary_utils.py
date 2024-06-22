@@ -20,19 +20,19 @@ IMAGE_DIMENSIONS = {
 
 
 def upload_image(file, file_id):
-    upload_response = cloudinary.uploader.upload(file, resource_type="image", folder=f"thumbnail/{file_id}")
+    upload_response = cloudinary.uploader.upload(file, resource_type="image", folder=f"song/{file_id}")
 
     return upload_response
 
+
 def upload_audio(file, file_id):
-    upload_response = cloudinary.uploader.upload(file, resource_type="auto", folder=f"audio/{file_id}")
+    upload_response = cloudinary.uploader.upload(file, resource_type="auto", folder=f"song/{file_id}")
 
     return upload_response
 
 
 def download_file(file):
-    url= cloudinary.utils.private_download_url("audio/2fabd0ed-ad82-4512-a0a0-ced76560ee41/vzj4gjvn9smscioekwey.mp3",format="MP3")
-    print(url)
+
     """
     cloudinary.utils.private_download_url('sample', 'jpg') 
                                                                                               
