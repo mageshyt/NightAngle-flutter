@@ -6,6 +6,10 @@ class TextStyles {
   static const TextStyle labelStyle = TextStyle(
     fontSize: Sizes.fontSizeMd,
     color: Pallete.subtitleText,
-    
+  );
+
+  static const TextStyle toastStyle = TextStyle(
+    fontSize: Sizes.fontSizeMd,
+    color: Pallete.black,
   );
 }

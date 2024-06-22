@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:nightAngle/core/core.dart';
 
 enum DioMethod { post, get, put, delete }
 
@@ -15,16 +16,22 @@ class APIService {
     Map<String, dynamic>? param,
     String? contentType,
     formData,
-    Map<String,String>? headers
+    Map<String, String>? headers,
+    bool? isAuthorized = false,
   }) async {
     try {
       final dio = Dio(
         BaseOptions(
           baseUrl: baseUrl,
           contentType: contentType ?? Headers.formUrlEncodedContentType,
-          headers: headers
+          headers: headers,
         ),
       );
+
+      if (isAuthorized == true) {
+        dio.interceptors.add(AuthHeaderIntro());
+      }
+
       switch (method) {
         case DioMethod.post:
           return dio.post(
@@ -55,5 +62,18 @@ class APIService {
     } catch (e) {
       throw Exception('Network error');
     }
+  }
+}
+
+class AuthHeaderIntro extends InterceptorsWrapper {
+  @override
+  Future onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    String token =
+        LocalStorage().readData('token'); // get your token from your resources
+    var headers = {"x-auth-token": token};
+    // Add token to headers before making a request
+    options.headers.addAll(headers);
+    return super.onRequest(options, handler);
   }
 }
