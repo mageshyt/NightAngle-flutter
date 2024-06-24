@@ -1,0 +1,47 @@
+import 'package:flutter/cupertino.dart';
+import 'package:nightAngle/core/core.dart';
+
+class SectionHeader extends StatelessWidget {
+  final String title;
+  final Function() onTap;
+  const SectionHeader({super.key,
+    required this.title,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+              color: Pallete.white,
+              fontSize: Sizes.fontSizeXLg,
+              fontWeight: FontWeight.bold,
+              shadows: [
+                BoxShadow(
+                  color: Pallete.white.withOpacity(0.9),
+                  blurRadius: 50,
+                  offset: Offset(0, 3),
+                  blurStyle: BlurStyle.outer,
+                  spreadRadius: 10,
+                ),
+              ]),
+        ),
+        const Spacer(),
+        Button(
+          onPressed: onTap,
+          variant: ButtonVariant.ghost,
+          label: const Text(
+            'View All',
+            style: TextStyle(
+              color: Pallete.subtitleText,
+              fontSize: Sizes.fontSizesm,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
