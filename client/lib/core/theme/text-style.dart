@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TextStyles {
   static const TextStyle labelStyle = TextStyle(
     fontSize: Sizes.fontSizeMd,
-    color: Pallete.subtitleText,
+    color: Pallete.grey,
   );
 
   static const TextStyle toastStyle = TextStyle(
@@ -19,10 +19,15 @@ class TextStyles {
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle sectionHeading = TextStyle(
-    color: Pallete.white,
-    fontSize: Sizes.fontSizeXLg,
-    fontWeight: FontWeight.bold,
-
-  );
+  static TextStyle sectionHeading = TextStyle(
+      color: Pallete.white,
+      fontSize: Sizes.fontSizeXLg,
+      fontWeight: FontWeight.bold,
+      shadows: [
+        BoxShadow(
+          color: Pallete.white.withOpacity(1),
+          blurRadius: 10,
+          offset: Offset(0, 5),
+        ),
+      ]);
 }

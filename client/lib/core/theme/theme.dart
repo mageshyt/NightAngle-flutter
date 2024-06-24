@@ -12,7 +12,13 @@ class AppTheme {
       elevation: 0,
       iconTheme: IconThemeData(color: Pallete.white),
     ),
-    textTheme: GoogleFonts.poppinsTextTheme(),
+    textTheme: GoogleFonts.poppinsTextTheme(
+      ThemeData.dark().textTheme,
+    ).apply(
+      bodyColor: Pallete.white,
+      displayColor: Pallete.white,
+      decorationColor: Pallete.white,
+    ),
     scaffoldBackgroundColor: Pallete.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
       floatingLabelBehavior: FloatingLabelBehavior.never,
