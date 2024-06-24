@@ -29,6 +29,41 @@ async def get_songs():
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
+
+@router.get('/me')
+async def get_current_user_songs( auth_user=Depends(auth_middleware)):
+    """
+    Get all songs.
+    """
+    try:
+
+
+        user_songs = await prisma.songs.find_many(where={"userId": auth_user.id})
+
+
+        return user_songs
+
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+
+
+@router.get('/user/{user_id}')
+async def get_user_songs(user_id: str):
+    """
+    Get all songs.
+    """
+    try:
+
+
+        user_songs = await prisma.songs.find_many(where={"userId": user_id})
+
+        print(user_songs)
+
+        return user_songs
+
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+
 @router.post('/upload')
 async def create_song(song: UploadFile = File(...),
                       artist: str = Form(...),
@@ -37,9 +72,6 @@ async def create_song(song: UploadFile = File(...),
                       auth_user=Depends(auth_middleware)):
 
     print(auth_user.id)
-
-    return  {"message":"upload"}
-
 
 @router.get('/{song_id}')
 async def get_song(song_id: str):
