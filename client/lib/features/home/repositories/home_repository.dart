@@ -75,4 +75,31 @@ class HomeRepository {
       return Left(HttpFailure(message: e.toString()));
     }
   }
+
+  Future<Either<HttpFailure, List<SongModel>>> getCurrentUserSongs() async {
+    try {
+      final res = await APIService.instance.request(
+        '/song/me',
+        DioMethod.get,
+        isAuthorized: true,
+      );
+
+      if (res.statusCode == 200) {
+        final List<SongModel> songs = [];
+        for (var song in res.data) {
+          LoggerHelper.debug('[GET ALL SONGS]${song['song_name']}');
+          songs.add(SongModel.fromMap(song));
+        }
+        LoggerHelper.debug('[GET ALL SONGS LENGTH]' + songs.length.toString());
+        return Right(songs);
+      } else {
+        return Left(HttpFailure(
+            message: res.data['details'] ?? "something went wrong",
+            code: res.statusCode.toString()));
+      }
+    } catch (e) {
+      LoggerHelper.error('[GET ALL SONGS ERROR]' + e.toString());
+      return Left(HttpFailure(message: e.toString()));
+    }
+  }
 }

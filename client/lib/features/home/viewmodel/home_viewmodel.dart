@@ -2,7 +2,9 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:nightAngle/core/widgets/toast.dart';
 import 'package:nightAngle/features/home/models/song-model.dart';
 import 'package:nightAngle/features/home/repositories/home_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,6 +14,15 @@ part 'home_viewmodel.g.dart';
 @riverpod
 Future<List<SongModel>> getAllSongs(GetAllSongsRef ref) async {
   final res = await ref.read(homeRepositoryProvider).getSongs();
+  return switch (res) {
+    Left(value: final l) => throw l.message,
+    Right(value: final r) => r,
+  };
+}
+
+@riverpod
+Future<List<SongModel>> getCurrentUserSongs(GetCurrentUserSongsRef ref) async {
+  final res = await ref.read(homeRepositoryProvider).getCurrentUserSongs();
   return switch (res) {
     Left(value: final l) => throw l.message,
     Right(value: final r) => r,
@@ -34,6 +45,7 @@ class HomeViewModel extends _$HomeViewModel {
     required String songName,
     required String artist,
     required Color hexCode,
+    required BuildContext context,
   }) async {
     state = const AsyncValue.loading();
 
@@ -48,7 +60,16 @@ class HomeViewModel extends _$HomeViewModel {
     final val = switch (res) {
       Left(value: final l) => state =
           AsyncValue.error(l.message, StackTrace.current),
-      Right(value: final r) => state = AsyncValue.data(r),
+      Right(value: final r) => _success(r, context),
     };
+
+    // revalidate the songs
+    ref.invalidate(getCurrentUserSongsProvider);
+  }
+
+  _success(r, context) {
+    toast.showSuccessToast(
+        context: context, message: "Song uploaded successfully");
+    state = AsyncValue.data(r);
   }
 }

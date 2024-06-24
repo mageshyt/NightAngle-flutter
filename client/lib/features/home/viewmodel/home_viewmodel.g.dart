@@ -20,7 +20,24 @@ final getAllSongsProvider = AutoDisposeFutureProvider<List<SongModel>>.internal(
 );
 
 typedef GetAllSongsRef = AutoDisposeFutureProviderRef<List<SongModel>>;
-String _$homeViewModelHash() => r'b5296b0e5c4c8a29a371d83aa8ea189142f1a56d';
+String _$getCurrentUserSongsHash() =>
+    r'da22a647755467ed4a6a3aebcc5d1536b0f4f35a';
+
+/// See also [getCurrentUserSongs].
+@ProviderFor(getCurrentUserSongs)
+final getCurrentUserSongsProvider =
+    AutoDisposeFutureProvider<List<SongModel>>.internal(
+  getCurrentUserSongs,
+  name: r'getCurrentUserSongsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getCurrentUserSongsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetCurrentUserSongsRef = AutoDisposeFutureProviderRef<List<SongModel>>;
+String _$homeViewModelHash() => r'f7680eb03f0b5c298d2d6831e3fe4a4954a95387';
 
 /// See also [HomeViewModel].
 @ProviderFor(HomeViewModel)
