@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -14,8 +13,8 @@ import 'package:reactive_file_picker/reactive_file_picker.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/theme/border-style.dart';
 
-import 'package:nightAngle/features/home/view/widgets/audio-wave.dart';
-import 'package:nightAngle/features/home/view/widgets/thumbnail-picker.dart';
+import 'package:nightAngle/features/home/view/widgets/upload-page/audio-wave.dart';
+import 'package:nightAngle/features/home/view/widgets/upload-page/thumbnail-picker.dart';
 import 'package:nightAngle/features/home/viewmodel/home_viewmodel.dart';
 
 class UploadSongPage extends ConsumerStatefulWidget {
@@ -82,11 +81,12 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
                       songName: form.control('song name').value,
                       artist: form.control('artist').value,
                       hexCode: (form.control('color').value),
+                      context: context,
                     );
 
                 // remove the errors
 
-                form.reset();
+                // form.reset();
               },
             )
           ],
