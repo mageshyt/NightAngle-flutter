@@ -53,5 +53,15 @@
 		<string>Explain why your app uses photo library</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>This app requires Mic permission.</string>
+
+		<key>NSMicrophoneUsageDescription</key>
+		<string>... explain why the app uses the microphone here ...</string>
+
+		<key>NSAppTransportSecurity</key>
+		<dict>
+ 	 	  <key>NSAllowsArbitraryLoads</key>
+  		  <true/>
+		</dict>
+
 	</dict>
 </plist>

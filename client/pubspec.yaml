@@ -35,7 +35,8 @@ dependencies:
   loading_animation_widget: ^1.2.1
   lottie: ^3.1.2
   google_fonts: ^6.2.1
-  flutter_glow: ^0.3.0
+  neon: ^0.1.0
+  animate_do: ^3.3.4
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +49,10 @@ dev_dependencies:
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
   build_runner: ^2.4.11
+  connectivity_plus: ^6.0.3
+  just_audio: ^0.9.38
+  just_audio_cache: ^0.1.2
+  cached_network_image: ^3.3.1
 
 flutter:
   uses-material-design: true
