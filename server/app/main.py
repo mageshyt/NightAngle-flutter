@@ -3,7 +3,7 @@ import uvicorn
 from dotenv import load_dotenv
 
 
-from .routers import auth, song
+from .routers import auth, song,playlist
 
 from .dependencies import prisma
 
@@ -13,6 +13,7 @@ load_dotenv()
 
 app.include_router(auth.router)
 app.include_router(song.router)
+app.include_router(playlist.router)
 
 
 @app.on_event("startup")

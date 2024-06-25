@@ -1,8 +1,8 @@
+from fastapi import APIRouter, HTTPException, status, Depends
+
 import bcrypt
 import jwt
 import os
-
-from fastapi import APIRouter, HTTPException, status, Depends
 
 from ..dependencies import prisma
 from ..middleware.auth_middleware import auth_middleware

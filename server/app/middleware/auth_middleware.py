@@ -20,7 +20,7 @@ async def auth_middleware(x_auth_token=Header()):
         # get the id from the token
         uid = verified_token.get('id')
         # get the user from the database
-        user = await prisma.user.find_unique(where={'id': uid}, include={'songs': True})
+        user = await prisma.user.find_unique(where={'id': uid}, include={'songs': True, 'playlists': True})
         if not user:
             raise HTTPException(401, 'User not found, authorization denied!')
         # remove the password from the user
