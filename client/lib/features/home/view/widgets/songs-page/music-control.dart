@@ -11,6 +11,15 @@ import 'package:nightAngle/core/providers/current_song_notifier.dart';
 class MusicControl extends ConsumerWidget {
   const MusicControl({super.key});
 
+  String _formatPosition(Duration? position) {
+    if (position == null) return '0:00';
+
+    final minutes = position.inMinutes;
+    final seconds = position.inSeconds % 60;
+
+    return '$minutes:${seconds < 10 ? '0' : ''}$seconds';
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final songNotifier = ref.read(currentSongNotifierProvider.notifier);
@@ -59,14 +68,14 @@ class MusicControl extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${position?.inMinutes}:${(position?.inSeconds ?? 0) < 10 ? '0${position?.inSeconds}' : position?.inSeconds}',
+                      _formatPosition(position),
                       style: const TextStyle(
                           color: Pallete.subtitleText,
                           fontSize: Sizes.fontSizesm,
                           fontWeight: FontWeight.w300),
                     ),
                     Text(
-                      '${duration?.inMinutes}:${(duration?.inSeconds ?? 0) < 10 ? '0${duration?.inSeconds}' : duration?.inSeconds}',
+                      _formatPosition(duration),
                       style: const TextStyle(
                           color: Pallete.subtitleText,
                           fontSize: Sizes.fontSizesm,

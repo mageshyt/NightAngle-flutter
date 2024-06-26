@@ -113,6 +113,16 @@ class MusicPlayer extends ConsumerWidget {
                           icon: const Icon(CupertinoIcons.heart,
                               color: Pallete.white),
                           onPressed: () {},
+                        ),
+
+                        Button(
+                          variant: ButtonVariant.icon,
+                          size: ButtonSize.icon,
+                          icon: const Icon(CupertinoIcons.bookmark,
+                              color: Pallete.white),
+                          onPressed: () {
+                            // create a playlist
+                          },
                         )
                       ],
                     ),
