@@ -3,51 +3,64 @@ import 'package:go_router/go_router.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/features/auth/view/pages/signin-page.dart';
 import 'package:nightAngle/features/auth/view/pages/signup-page.dart';
+import 'package:nightAngle/features/home/models/song-model.dart';
 import 'package:nightAngle/features/home/view/pages/home-page.dart';
 import 'package:nightAngle/features/home/view/pages/upload-song-page.dart';
+import 'package:nightAngle/features/home/view/widgets/songs-page/music%20player.dart';
 
 class AppRouter {
   static GoRouter returnRouter(bool isAuth) {
     GoRouter router = GoRouter(
-      initialLocation: '/login',
+      initialLocation: Routes.home,
       routes: [
         // Define a default route p
         GoRoute(
-          name: Routes.home,
-          path: '/',
+          name: RoutesName.home,
+          path: Routes.home,
           pageBuilder: (context, state) =>
               const MaterialPage(child: HomePage()),
         ),
 
         GoRoute(
-          name: Routes.login,
-          path: '/login',
-          pageBuilder: (context, state) =>
-              const MaterialPage(child: SignInPage()),
+          name: RoutesName.login,
+          path: Routes.login,
+          pageBuilder: (context, state) => const MaterialPage(
+            child: SignInPage(),
+          ),
         ),
 
         GoRoute(
-          name: Routes.register,
-          path: '/register',
+          name: RoutesName.register,
+          path: Routes.register,
           pageBuilder: (context, state) => const MaterialPage(
             child: SignUpPage(),
           ),
         ),
 
         GoRoute(
-          name: Routes.upload,
-          path: '/upload',
+          name: RoutesName.upload,
+          path: Routes.upload,
           pageBuilder: (context, state) => const MaterialPage(
             child: UploadSongPage(),
           ),
-        )
+        ),
+
+        GoRoute(
+          name: RoutesName.musicPlay,
+          path: Routes.musicPlay,
+          pageBuilder: (context, state) {
+            return const MaterialPage(
+              child: MusicPlayer(),
+            );
+          },
+        ),
       ],
-      redirect: (context, state) {
-        if (isAuth) {
-          return '/';
-        }
-        return '/login';
-      },
+      // redirect: (context, state) {
+      //   if (isAuth) {
+      //     return '/';
+      //   }
+      //   return '/login';
+      // },
     );
 
     return router;

@@ -124,7 +124,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                context.goNamed(Routes.register);
+                                context.go(Routes.register);
                               },
                             text: ' Sign Up',
                             style: const TextStyle(

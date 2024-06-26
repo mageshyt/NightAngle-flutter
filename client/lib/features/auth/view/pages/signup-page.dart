@@ -163,7 +163,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             TextSpan(
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  context.goNamed(Routes.login);
+                                  context.go(Routes.login);
                                 },
                               text: ' login',
                               style: const TextStyle(
