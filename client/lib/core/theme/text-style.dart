@@ -20,14 +20,21 @@ class TextStyles {
   );
 
   static TextStyle sectionHeading = TextStyle(
-      color: Pallete.white,
-      fontSize: Sizes.fontSizeXLg,
-      fontWeight: FontWeight.bold,
-      shadows: [
-        BoxShadow(
-          color: Pallete.white.withOpacity(1),
-          blurRadius: 10,
-          offset: Offset(0, 5),
-        ),
-      ]);
+    color: Pallete.white,
+    fontSize: Sizes.fontSizeXLg,
+    fontWeight: FontWeight.bold,
+    shadows: [
+      BoxShadow(
+        color: Pallete.white.withOpacity(1),
+        blurRadius: 10,
+        offset: Offset(0, 5),
+      ),
+    ],
+  );
+
+  static TextStyle songTitle = const TextStyle(
+    color: Pallete.white,
+    fontSize: Sizes.fontSizeXLg,
+    fontWeight: FontWeight.w700,
+  );
 }
