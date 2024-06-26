@@ -76,6 +76,7 @@ class Sizes {
 
   // Image carousel height
   static const double imageCarouselHeight = 200.0;
+  static const double imageSm = 60;
 
   // Loading indicator size
   static const double loadingIndicatorSize = 36.0;

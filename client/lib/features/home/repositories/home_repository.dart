@@ -76,7 +76,8 @@ class HomeRepository {
     }
   }
 
-  Future<Either<HttpFailure, List<SongModel>>> getCurrentUserSongs() async {
+
+   Future<Either<HttpFailure, List<SongModel>>> getCurrentUserSongs() async {
     try {
       final res = await APIService.instance.request(
         '/song/me',
@@ -102,4 +103,6 @@ class HomeRepository {
       return Left(HttpFailure(message: e.toString()));
     }
   }
+
+
 }

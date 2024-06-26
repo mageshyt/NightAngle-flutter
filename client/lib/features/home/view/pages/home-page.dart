@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:nightAngle/features/home/view/pages/library-page.dart';
 import 'package:nightAngle/features/home/view/pages/search-page.dart';
 import 'package:nightAngle/features/home/view/pages/songs-page.dart';
 import 'package:nightAngle/features/home/view/pages/upload-song-page.dart';
+import 'package:nightAngle/features/home/view/widgets/music-slab.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -52,7 +52,17 @@ class _HomePageState extends ConsumerState<HomePage> {
         }),
         currentIndex: selectedPage,
       ),
-      body: pages[selectedPage],
+      body: Stack(
+        children: [
+          pages[selectedPage],
+          const Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: MusicSlab(),
+          ),
+        ],
+      ),
     );
   }
 }
