@@ -18,7 +18,18 @@ class MusicPlayer extends ConsumerWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: Sizes.lg),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            hexToColor(song!.hex_color),
+            const Color(0xff121212),
+          ],
+        ),
+      ),
       child: Scaffold(
+          backgroundColor: Pallete.transparent,
           appBar: AppBar(
             backgroundColor: Pallete.transparent,
             elevation: 0,
