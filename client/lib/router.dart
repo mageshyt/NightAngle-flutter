@@ -3,15 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/features/auth/view/pages/signin-page.dart';
 import 'package:nightAngle/features/auth/view/pages/signup-page.dart';
-import 'package:nightAngle/features/home/models/song-model.dart';
 import 'package:nightAngle/features/home/view/pages/home-page.dart';
 import 'package:nightAngle/features/home/view/pages/upload-song-page.dart';
-import 'package:nightAngle/features/home/view/widgets/songs-page/music%20player.dart';
+import 'package:nightAngle/features/home/view/pages/music%20player.dart';
 
 class AppRouter {
   static GoRouter returnRouter(bool isAuth) {
     GoRouter router = GoRouter(
-      initialLocation: Routes.home,
+      initialLocation: Routes.musicPlay,
       routes: [
         // Define a default route p
         GoRoute(
