@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:nightAngle/core/constants/constants.dart';
 import 'package:nightAngle/core/core.dart';
@@ -52,6 +54,11 @@ class MusicPlayer extends ConsumerWidget {
                         child: CachedImage(
                           imageUrl: song!.thumbnail_url,
                           width: Sizes.productImageSize,
+                          placeholder: Container(
+                            width: Sizes.productImageSize,
+                            height: Sizes.productImageSize,
+                            child: const Loader(),
+                          ),
                         ),
                       ),
                     ),
@@ -108,6 +115,98 @@ class MusicPlayer extends ConsumerWidget {
                           max: 1,
                           onChanged: (val) {},
                         ),
+
+                        //  ---------------------------- duration----------------
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Sizes.sm, vertical: Sizes.xs),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '0:00',
+                                style: TextStyle(
+                                    color: Pallete.subtitleText,
+                                    fontSize: Sizes.fontSizesm,
+                                    fontWeight: FontWeight.w300),
+                              ),
+                              Text(
+                                '3:00',
+                                style: TextStyle(
+                                    color: Pallete.subtitleText,
+                                    fontSize: Sizes.fontSizesm,
+                                    fontWeight: FontWeight.w300),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // ----------------------------- music controls----------------
+
+                        const SizedBox(
+                          height: Sizes.spaceBtwItems,
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // shuffle button
+                            Button(
+                              variant: ButtonVariant.icon,
+                              size: ButtonSize.icon,
+                              icon: SvgPicture.asset(
+                                'assets/icons/Shuffle.svg',
+                                width: Sizes.iconSm,
+                              ),
+                              onPressed: () {},
+                            ),
+
+                            // ------------------ previous button----------------
+                            Button(
+                              variant: ButtonVariant.icon,
+                              size: ButtonSize.icon,
+                              icon: SvgPicture.asset(
+                                'assets/icons/Previous.svg',
+                                width: Sizes.iconSm,
+                              ),
+                              onPressed: () {},
+                            ),
+
+                            // ------------------ play button----------------
+                            Button(
+                              variant: ButtonVariant.icon,
+                              size: ButtonSize.icon,
+                              icon: const Icon(
+                                CupertinoIcons.play_circle_fill,
+                                size: 70,
+                              ),
+                              onPressed: () {},
+                            ),
+
+                            // ------------------ next button----------------
+                            Button(
+                              variant: ButtonVariant.icon,
+                              size: ButtonSize.icon,
+                              icon: SvgPicture.asset(
+                                'assets/icons/Next.svg',
+                                width: Sizes.iconSm,
+                              ),
+                              onPressed: () {},
+                            ),
+
+                            // Repeat button
+                            Button(
+                              variant: ButtonVariant.icon,
+                              size: ButtonSize.icon,
+                              icon: SvgPicture.asset(
+                                'assets/icons/Repeat.svg',
+                                width: Sizes.iconSm,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ],
+                        )
                       ],
                     )
                   ],

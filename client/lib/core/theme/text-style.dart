@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TextStyles {
   static const TextStyle labelStyle = TextStyle(
     fontSize: Sizes.fontSizeMd,
-    color: Pallete.grey,
+    color: Pallete.subtitleText,
   );
 
   static const TextStyle toastStyle = TextStyle(
