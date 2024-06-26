@@ -6,7 +6,7 @@ import 'package:nightAngle/features/auth/view/pages/signin-page.dart';
 import 'package:nightAngle/features/auth/view/pages/signup-page.dart';
 import 'package:nightAngle/features/home/view/pages/home-page.dart';
 import 'package:nightAngle/features/home/view/pages/upload-song-page.dart';
-import 'package:nightAngle/features/home/view/pages/music%20player.dart';
+import 'package:nightAngle/features/home/view/pages/music-player.dart';
 
 class AppRouter {
   static GoRouter returnRouter(bool isAuth) {
