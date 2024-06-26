@@ -15,6 +15,7 @@ class MusicPlayer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final song = ref.watch(currentSongNotifierProvider);
+    final isPlaying = ref.watch(currentSongNotifierProvider.notifier).isPlaying;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: Sizes.lg),
@@ -108,7 +109,8 @@ class MusicPlayer extends ConsumerWidget {
                         Button(
                           variant: ButtonVariant.icon,
                           size: ButtonSize.icon,
-                          icon: Icon(IconlyLight.heart),
+                          icon: const Icon(CupertinoIcons.heart,
+                              color: Pallete.white),
                           onPressed: () {},
                         )
                       ],
@@ -188,11 +190,17 @@ class MusicPlayer extends ConsumerWidget {
                             Button(
                               variant: ButtonVariant.icon,
                               size: ButtonSize.icon,
-                              icon: const Icon(
-                                CupertinoIcons.play_circle_fill,
+                              icon: Icon(
+                                isPlaying
+                                    ? CupertinoIcons.pause_circle_fill
+                                    : IconlyBold.play,
                                 size: 70,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                ref
+                                    .read(currentSongNotifierProvider.notifier)
+                                    .playPause();
+                              },
                             ),
 
                             // ------------------ next button----------------
