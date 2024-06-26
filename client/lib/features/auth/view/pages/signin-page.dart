@@ -41,7 +41,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 message: Texts.loginSuccess,
                 contentType: ContentType.success);
             // navigate to home page
-            context.goNamed(Routes.home);
+            context.go(Routes.home);
           },
           error: (err, stack) {
             showSnackbar(
