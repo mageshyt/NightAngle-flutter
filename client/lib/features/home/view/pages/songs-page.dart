@@ -38,11 +38,11 @@ class SongsPage extends ConsumerWidget {
             // Songs section
 
             SectionHeader(
-              title: 'Your Songs',
+              title: 'Most Played Songs',
               onTap: () {},
             ),
 
-            ref.watch(getCurrentUserSongsProvider).when(
+            ref.watch(getTopSongsProvider).when(
                   loading: () => const Center(child: Loader()),
                   error: (error, stackTrace) => Center(
                     child: Text('Error: $error'),

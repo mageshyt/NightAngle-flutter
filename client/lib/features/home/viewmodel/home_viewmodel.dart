@@ -42,6 +42,15 @@ Future<List<SongModel>> getCurrentUserSongs(GetCurrentUserSongsRef ref) async {
 }
 
 @riverpod
+Future<List<SongModel>> getTopSongs(GetTopSongsRef ref) async {
+  final res = await ref.read(homeRepositoryProvider).topFavoriteSongs();
+  return switch (res) {
+    Left(value: final l) => throw l.message,
+    Right(value: final r) => r,
+  };
+}
+
+@riverpod
 class HomeViewModel extends _$HomeViewModel {
   late HomeRepository _homeRepository;
   late HomeLocalRepository _homeLocalRepository;
@@ -136,7 +145,4 @@ class HomeViewModel extends _$HomeViewModel {
   List<SongModel> getRecentlyPlayedSong() {
     return _homeLocalRepository.getLocalSongs();
   }
-
-
-  
 }

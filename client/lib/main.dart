@@ -49,16 +49,12 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentUser = ref.watch(currentUserNotifierProvider);
-
-    LoggerHelper.debug("CURRENT USER" + currentUser.toString());
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Night Angle',
       theme: AppTheme.darkThemeMode,
       routerConfig: AppRouter.returnRouter(
-        currentUser != null,
+        false,
       ),
     );
   }
