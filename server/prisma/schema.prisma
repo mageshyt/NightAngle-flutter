@@ -13,12 +13,29 @@ model User {
   name      String
   email     String     @unique
   password  String
-  songs     Songs[]
   playlists Playlist[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  songs     Songs[]
+  favorites Favorite[]
 
   @@index([email], name: "email")
+}
+
+model Favorite {
+  id String @id @default(uuid())
+
+  song   Songs  @relation(fields: [songId], references: [id])
+  songId String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([songId], name: "songId")
+  @@index([userId, songId], name: "userId_songId")
 }
 
 model Songs {
@@ -28,11 +45,13 @@ model Songs {
   song_url      String
   artist        String
   hex_color     String
-  user          User       @relation(fields: [userId], references: [id])
+  favoriteCount Int        @default(0)
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
   playlists     Playlist[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
+  Favorite      Favorite[]
 
   @@index([song_name], name: "song_name")
 }
@@ -41,7 +60,7 @@ model Playlist {
   id        String   @id @default(uuid())
   name      String
   songs     Songs[]
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
