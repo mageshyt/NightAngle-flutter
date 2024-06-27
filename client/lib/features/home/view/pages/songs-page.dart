@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:nightAngle/features/home/view/widgets/section-header.dart';
+import 'package:nightAngle/features/home/view/widgets/songs-page/recently-played-song.dart';
 import 'package:nightAngle/features/home/view/widgets/songs-page/songs-card.dart';
 
 import 'package:nightAngle/features/home/view/widgets/songs-page/songs-page-header.dart';
@@ -28,7 +29,12 @@ class SongsPage extends ConsumerWidget {
             // Header section
 
             SongsPageHeader(user: user),
+
+
             const SizedBox(height: Sizes.spaceBtwSections),
+
+            // Recent played section
+            const RecentlyPlayedSong(),
 
             // Songs section
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:nightAngle/core/widgets/toast.dart';
 import 'package:nightAngle/features/home/models/song-model.dart';
+import 'package:nightAngle/features/home/repositories/home_local_repository.dart';
 import 'package:nightAngle/features/home/repositories/home_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -32,10 +33,12 @@ Future<List<SongModel>> getCurrentUserSongs(GetCurrentUserSongsRef ref) async {
 @riverpod
 class HomeViewModel extends _$HomeViewModel {
   late HomeRepository _homeRepository;
+  late HomeLocalRepository _homeLocalRepository;
 
   @override
   AsyncValue? build() {
     _homeRepository = ref.watch(homeRepositoryProvider);
+    _homeLocalRepository = ref.watch(homeLocalRepositoryProvider);
     return null;
   }
 
@@ -71,5 +74,9 @@ class HomeViewModel extends _$HomeViewModel {
     toast.showSuccessToast(
         context: context, message: "Song uploaded successfully");
     state = AsyncValue.data(r);
+  }
+
+  List<SongModel> getRecentlyPlayedSong() {
+    return _homeLocalRepository.getLocalSongs();
   }
 }

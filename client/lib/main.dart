@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:hive/hive.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+ import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightAngle/core/providers/current_user_notifier.dart';
@@ -10,15 +12,20 @@ import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:nightAngle/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:nightAngle/router.dart';
 
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  final dir = await getApplicationDocumentsDirectory();
+  Hive.defaultDirectory = dir.path;
+
   final container = ProviderContainer();
 
-  var connectivityResult = await (Connectivity().checkConnectivity());
-  if (connectivityResult == ConnectivityResult.none) {
-    LoggerHelper.debug('No internet connection');
-  }
+  var connectivityResult = await Connectivity().checkConnectivity();
+  // if (connectivityResult. ConnectivityResult.none) {
+  //   LoggerHelper.debug('No internet connection');
+  // }
   LoggerHelper.debug(connectivityResult.toString());
 
   await container.read(authViewModelProvider.notifier).getCurrentUser();
@@ -34,7 +41,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserNotifierProvider);
 
-    LoggerHelper.debug(currentUser.toString());
+    LoggerHelper.debug("CURRENT USER" + currentUser.toString());
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

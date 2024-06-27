@@ -39,6 +39,10 @@ dependencies:
   animate_do: ^3.3.4
   talker_dio_logger: ^4.3.0
   talker_flutter: ^4.3.0
+  hive: ^4.0.0-dev.2
+  isar_flutter_libs: ^4.0.0-dev.13
+  path_provider: ^2.1.0
+  just_audio_background: ^0.0.1-beta.12
 
 dev_dependencies:
   flutter_test:

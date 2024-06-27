@@ -1,5 +1,6 @@
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/features/home/models/song-model.dart';
+import 'package:nightAngle/features/home/repositories/home_local_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
@@ -9,11 +10,12 @@ part 'current_song_notifier.g.dart';
 @riverpod
 class CurrentSongNotifier extends _$CurrentSongNotifier {
   AudioPlayer? audioPlayer;
-
+  late HomeLocalRepository _homeLocalRepository;
   bool isPlaying = false;
 
   @override
   SongModel? build() {
+    _homeLocalRepository = ref.watch(homeLocalRepositoryProvider);
     return null;
   }
 
@@ -47,6 +49,10 @@ class CurrentSongNotifier extends _$CurrentSongNotifier {
           this.state = this.state?.copyWith(hex_color: this.state?.hex_color);
         }
       });
+      // add the song to local storage
+      _homeLocalRepository.uploadLocalSong(song);
+
+      // ref.invalidate(homeLocalRepositoryProvider);
 
       audioPlayer!.play();
       isPlaying = true;
@@ -68,7 +74,6 @@ class CurrentSongNotifier extends _$CurrentSongNotifier {
 
     state = state?.copyWith(hex_color: state!.hex_color);
   }
-
 
   void seek(double val) {
     audioPlayer!.seek(

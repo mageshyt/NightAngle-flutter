@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -9,6 +8,7 @@ import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/providers/current_song_notifier.dart';
 import 'package:nightAngle/core/theme/text-style.dart';
 import 'package:nightAngle/features/home/view/widgets/songs-page/music-control.dart';
+import 'package:nightAngle/features/home/view/widgets/songs-page/rotation-disk.dart';
 
 class MusicPlayer extends ConsumerWidget {
   const MusicPlayer({super.key});
@@ -65,7 +65,7 @@ class MusicPlayer extends ConsumerWidget {
                         borderRadius:
                             BorderRadius.circular(Sizes.productImageRadius),
                         child: CachedImage(
-                          imageUrl: song!.thumbnail_url,
+                          imageUrl: song.thumbnail_url,
                           width: Sizes.productImageSize,
                           placeholder: Container(
                             width: Sizes.productImageSize,
@@ -88,10 +88,11 @@ class MusicPlayer extends ConsumerWidget {
                     // ----------------- song name & heart-------------------
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               song.song_name,
@@ -104,7 +105,12 @@ class MusicPlayer extends ConsumerWidget {
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          width: 10,
+                        ),
 
+                        RotatingDisk(),
+                        const Spacer(),
                         // Favorite
 
                         Button(

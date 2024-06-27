@@ -44,7 +44,7 @@ class MusicSlab extends ConsumerWidget {
               borderRadius: BorderRadius.circular(Sizes.borderRadiusXl),
               gradient: LinearGradient(
                 colors: [
-                  hexToColor(currentSong.hex_color).withOpacity(0.7),
+                  hexToColor(currentSong.hex_color),
                   Pallete.cardColor.withOpacity(0.7),
                 ],
                 begin: Alignment.topLeft,
