@@ -76,8 +76,7 @@ class HomeRepository {
     }
   }
 
-
-   Future<Either<HttpFailure, List<SongModel>>> getCurrentUserSongs() async {
+  Future<Either<HttpFailure, List<SongModel>>> getCurrentUserSongs() async {
     try {
       final res = await APIService.instance.request(
         '/song/me',
@@ -104,5 +103,53 @@ class HomeRepository {
     }
   }
 
+  Future<Either<HttpFailure, bool>> favoriteSong({
+    required songId,
+  }) async {
+    try {
+      final res = await APIService.instance.request(
+        '/song/favorite/$songId',
+        DioMethod.put,
+        isAuthorized: true,
+      );
+      LoggerHelper.debug(res.data.toString());
+      if (res.statusCode == 200) {
+        return Right(res.data['message']);
+      } else {
+        return Left(HttpFailure(
+            message: res.data['details'] ?? "something went wrong",
+            code: res.statusCode.toString()));
+      }
+    } catch (e) {
+      LoggerHelper.error('[FAV SONGS ERROR]' + e.toString());
+      return Left(HttpFailure(message: e.toString()));
+    }
+  }
 
+  Future<Either<HttpFailure, List<SongModel>>> getfavorites() async {
+    try {
+      final res = await APIService.instance.request(
+        '/song/favorite',
+        DioMethod.get,
+        isAuthorized: true,
+      );
+
+      if (res.statusCode == 200) {
+        final List<SongModel> songs = [];
+        for (var song in res.data['favorite_songs']) {
+          // LoggerHelper.debug('[GET ALL SONGS]${song['favorite_songs'].}');
+          songs.add(SongModel.fromMap(song['song']));
+        }
+        LoggerHelper.debug('[GET ALL SONGS LENGTH]' + songs.length.toString());
+        return Right(songs);
+      } else {
+        return Left(HttpFailure(
+            message: res.data['details'] ?? "something went wrong",
+            code: res.statusCode.toString()));
+      }
+    } catch (e) {
+      LoggerHelper.error('[GET ALL SONGS ERROR]' + e.toString());
+      return Left(HttpFailure(message: e.toString()));
+    }
+  }
 }

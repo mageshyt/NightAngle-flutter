@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nightAngle/features/home/view/pages/library-page.dart';
 
 import 'package:nightAngle/features/home/view/pages/search-page.dart';
 import 'package:nightAngle/features/home/view/pages/songs-page.dart';
@@ -19,7 +20,7 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   var selectedPage = 0;
 
-  final pages = const [SongsPage(), SearchPage(), UploadSongPage()];
+  final pages = const [SongsPage(), SearchPage(), LibraryPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

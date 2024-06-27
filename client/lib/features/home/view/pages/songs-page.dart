@@ -30,7 +30,6 @@ class SongsPage extends ConsumerWidget {
 
             SongsPageHeader(user: user),
 
-
             const SizedBox(height: Sizes.spaceBtwSections),
 
             // Recent played section
@@ -57,6 +56,7 @@ class SongsPage extends ConsumerWidget {
                         final song = songs[index];
                         return FadeIn(
                           delay: Duration(milliseconds: 500 * index),
+                          manualTrigger: false,
                           child: SongsCard(song: song),
                         );
                       },

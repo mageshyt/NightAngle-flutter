@@ -6,9 +6,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nightAngle/core/constants/constants.dart';
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/providers/current_song_notifier.dart';
+import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:nightAngle/core/theme/text-style.dart';
 import 'package:nightAngle/features/home/view/widgets/songs-page/music-control.dart';
 import 'package:nightAngle/features/home/view/widgets/songs-page/rotation-disk.dart';
+import 'package:nightAngle/features/home/viewmodel/home_viewmodel.dart';
 
 class MusicPlayer extends ConsumerWidget {
   const MusicPlayer({super.key});
@@ -18,6 +20,8 @@ class MusicPlayer extends ConsumerWidget {
     final song = ref.watch(currentSongNotifierProvider);
     final songNotifier = ref.read(currentSongNotifierProvider.notifier);
 
+    final userFavorites = ref
+        .watch(currentUserNotifierProvider.select((data) => data!.favorites));
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: Sizes.lg),
       decoration: BoxDecoration(
@@ -116,9 +120,20 @@ class MusicPlayer extends ConsumerWidget {
                         Button(
                           variant: ButtonVariant.icon,
                           size: ButtonSize.icon,
-                          icon: const Icon(CupertinoIcons.heart,
-                              color: Pallete.white),
-                          onPressed: () {},
+                          icon: Icon(
+                            userFavorites
+                                    .where((fav) => fav.songId == song.id)
+                                    .toList()
+                                    .isNotEmpty
+                                ? CupertinoIcons.heart_fill
+                                : CupertinoIcons.heart,
+                            color: Colors.white,
+                          ),
+                          onPressed: () async {
+                            await ref
+                                .watch(homeViewModelProvider.notifier)
+                                .favSong(songId: song.id);
+                          },
                         ),
 
                         Button(

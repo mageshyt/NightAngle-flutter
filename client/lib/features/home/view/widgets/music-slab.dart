@@ -8,8 +8,10 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nightAngle/core/core.dart';
+import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:nightAngle/core/providers/providers.dart';
 import 'package:nightAngle/core/theme/app_pallete.dart';
+import 'package:nightAngle/features/home/viewmodel/home_viewmodel.dart';
 
 class MusicSlab extends ConsumerWidget {
   const MusicSlab({super.key});
@@ -17,7 +19,10 @@ class MusicSlab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentSong = ref.watch(currentSongNotifierProvider);
+    final songNotifier = ref.read(currentSongNotifierProvider.notifier);
 
+    final userFavorites = ref
+        .watch(currentUserNotifierProvider.select((data) => data!.favorites));
     LoggerHelper.info('MUSIC SLAP ${currentSong?.song_name}');
 
     if (currentSong == null) {
@@ -109,11 +114,20 @@ class MusicSlab extends ConsumerWidget {
                     // heart icon
 
                     IconButton(
-                      icon: const Icon(
-                        CupertinoIcons.heart,
+                      icon: Icon(
+                        userFavorites
+                                .where((fav) => fav.songId == currentSong.id)
+                                .toList()
+                                .isNotEmpty
+                            ? CupertinoIcons.heart_fill
+                            : CupertinoIcons.heart,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await ref
+                            .watch(homeViewModelProvider.notifier)
+                            .favSong(songId: currentSong.id);
+                      },
                     ),
 
                     IconButton(

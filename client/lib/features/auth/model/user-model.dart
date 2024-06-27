@@ -1,17 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:nightAngle/features/home/models/fav-song-model.dart';
+
 class UserModel {
   String id;
   String name;
   String email;
   String? token;
+  List<FavSongModel> favorites;
 
   UserModel({
     required this.id,
     required this.name,
     required this.email,
     this.token,
+    required this.favorites,
   });
 
   UserModel copyWith({
@@ -19,12 +23,14 @@ class UserModel {
     String? name,
     String? email,
     String? token,
+    List<FavSongModel>? favorites,
   }) {
     return UserModel(
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
       token: token ?? this.token,
+      favorites: favorites ?? this.favorites,
     );
   }
 
@@ -34,6 +40,7 @@ class UserModel {
       'name': name,
       'email': email,
       'token': token,
+      'favorites': favorites.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -43,6 +50,9 @@ class UserModel {
       name: map['name'] as String,
       email: map['email'] as String,
       token: map['token'] != null ? map['token'] as String : null,
+      favorites: List<FavSongModel>.from(map['favorites']
+              ?.map((x) => FavSongModel.fromMap(x as Map<String, dynamic>))
+          as Iterable),
     );
   }
 
@@ -53,7 +63,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, token: $token)';
+    return 'UserModel(id: $id, name: $name, email: $email, token: $token, favorites: $favorites)';
   }
 
   @override

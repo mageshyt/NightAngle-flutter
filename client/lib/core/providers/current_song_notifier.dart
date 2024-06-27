@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_public_notifier_properties
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/features/home/models/song-model.dart';
 import 'package:nightAngle/features/home/repositories/home_local_repository.dart';
@@ -51,8 +52,6 @@ class CurrentSongNotifier extends _$CurrentSongNotifier {
       });
       // add the song to local storage
       _homeLocalRepository.uploadLocalSong(song);
-
-      // ref.invalidate(homeLocalRepositoryProvider);
 
       audioPlayer!.play();
       isPlaying = true;
