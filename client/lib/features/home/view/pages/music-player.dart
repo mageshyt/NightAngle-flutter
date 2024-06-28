@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:nightAngle/core/constants/constants.dart';
 import 'package:nightAngle/core/core.dart';
@@ -18,10 +17,10 @@ class MusicPlayer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final song = ref.watch(currentSongNotifierProvider);
-    final songNotifier = ref.read(currentSongNotifierProvider.notifier);
+    // final songNotifier = ref.read(currentSongNotifierProvider.notifier);
 
-    final userFavorites = ref
-        .watch(currentUserNotifierProvider.select((data) => data!.favorites));
+    final userFavorites =
+        ref.read(currentUserNotifierProvider.select((data) => data!.favorites));
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: Sizes.lg),
       decoration: BoxDecoration(

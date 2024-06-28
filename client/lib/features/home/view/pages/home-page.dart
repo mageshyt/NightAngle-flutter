@@ -5,7 +5,7 @@ import 'package:nightAngle/core/core.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nightAngle/features/home/view/pages/library-page.dart';
 
-import 'package:nightAngle/features/home/view/pages/search-page.dart';
+import 'package:nightAngle/features/search/view/page/search-page.dart';
 import 'package:nightAngle/features/home/view/pages/songs-page.dart';
 import 'package:nightAngle/features/home/view/pages/upload-song-page.dart';
 import 'package:nightAngle/features/home/view/widgets/music-slab.dart';
