@@ -8,7 +8,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nightAngle/core/providers/current_user_notifier.dart';
 
 import 'package:nightAngle/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:nightAngle/router.dart';
@@ -49,13 +48,15 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Night Angle',
       theme: AppTheme.darkThemeMode,
-      routerConfig: AppRouter.returnRouter(
-        false,
-      ),
+      routeInformationParser: router.routeInformationParser,
+      routerDelegate: router.routerDelegate,
+      routeInformationProvider: router.routeInformationProvider,
     );
   }
 }

@@ -40,7 +40,7 @@ class UserModel {
       'name': name,
       'email': email,
       'token': token,
-      'favorites': favorites.map((x) => x.toMap()).toList(),
+      'favorites': favorites?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -50,9 +50,11 @@ class UserModel {
       name: map['name'] as String,
       email: map['email'] as String,
       token: map['token'] != null ? map['token'] as String : null,
-      favorites: List<FavSongModel>.from(map['favorites']
-              ?.map((x) => FavSongModel.fromMap(x as Map<String, dynamic>))
-          as Iterable),
+      favorites: map['favorites'] == null
+          ? <FavSongModel>[]
+          : List<FavSongModel>.from(map['favorites']
+                  ?.map((x) => FavSongModel.fromMap(x as Map<String, dynamic>))
+              as Iterable),
     );
   }
 

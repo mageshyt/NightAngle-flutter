@@ -105,9 +105,7 @@ class AuthRemoteRepository {
     } catch (e) {
       if (e is DioException) {
         // LoggerHelper.error(e.response.toString());
-        return Left(HttpFailure(
-            message: "Something went wrong",
-            code: '500'));
+        return Left(HttpFailure(message: "Something went wrong", code: '500'));
       }
 
       return Left(HttpFailure(message: e.toString(), code: '500'));
