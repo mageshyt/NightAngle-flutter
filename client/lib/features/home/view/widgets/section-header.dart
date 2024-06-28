@@ -4,7 +4,8 @@ import 'package:nightAngle/core/core.dart';
 class SectionHeader extends StatelessWidget {
   final String title;
   final Function() onTap;
-  const SectionHeader({super.key,
+  const SectionHeader({
+    super.key,
     required this.title,
     required this.onTap,
   });
@@ -17,7 +18,7 @@ class SectionHeader extends StatelessWidget {
           title,
           style: TextStyle(
               color: Pallete.white,
-              fontSize: Sizes.fontSizeXLg,
+              fontSize: Sizes.fontSizeLg,
               fontWeight: FontWeight.bold,
               shadows: [
                 BoxShadow(
