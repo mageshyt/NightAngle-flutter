@@ -125,7 +125,8 @@ class HomeRepository {
       return Left(HttpFailure(message: e.toString()));
     }
   }
-  Future<Either<HttpFailure, List<SongModel>>> topFavoriteSongs () async {
+
+  Future<Either<HttpFailure, List<SongModel>>> topFavoriteSongs() async {
     try {
       final res = await APIService.instance.request(
         '/song/top-favorite',
@@ -174,6 +175,26 @@ class HomeRepository {
     } catch (e) {
       LoggerHelper.error('[GET ALL SONGS ERROR]' + e.toString());
       return Left(HttpFailure(message: e.toString()));
+    }
+  }
+
+  Future<Either<Null, List<SongModel>>> getSearchResults(String query) async {
+    try {
+      final res = await APIService.instance
+          .request('/song/search/?query=$query', DioMethod.get);
+
+      if (res.statusCode == 200) {
+        final List<SongModel> songs = [];
+        for (var song in res.data) {
+          songs.add(SongModel.fromMap(song));
+        }
+        return Right(songs);
+      }
+      return const Left(null);
+    } catch (e) {
+      LoggerHelper.error('[GET ALL SONGS ERROR]' + e.toString());
+
+      return const Left(null);
     }
   }
 }

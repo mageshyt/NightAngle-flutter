@@ -34,11 +34,10 @@ class SongsPage extends ConsumerWidget {
 
             // Recent played section
             const RecentlyPlayedSong(),
-
             // Songs section
 
             SectionHeader(
-              title: 'Most Played Songs',
+              title: 'Most Played ',
               onTap: () {},
             ),
 
@@ -55,7 +54,8 @@ class SongsPage extends ConsumerWidget {
                       itemBuilder: (context, index) {
                         final song = songs[index];
                         return FadeIn(
-                          delay: Duration(milliseconds: 500 * index),
+                          delay:
+                              Duration(milliseconds: 250 * (index / 2).round()),
                           manualTrigger: false,
                           child: SongsCard(song: song),
                         );
