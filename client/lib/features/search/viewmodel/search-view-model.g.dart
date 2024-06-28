@@ -157,7 +157,7 @@ class _GetSearchResultsProviderElement
   String get query => (origin as GetSearchResultsProvider).query;
 }
 
-String _$searchViewModelHash() => r'fd6edc2a7d9abfcf8c09bdde2b1e2da1c253e577';
+String _$searchViewModelHash() => r'b13125802c1df703b82083afa9485f128e798fd8';
 
 /// See also [SearchViewModel].
 @ProviderFor(SearchViewModel)

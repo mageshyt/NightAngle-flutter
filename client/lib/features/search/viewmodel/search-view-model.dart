@@ -35,7 +35,7 @@ class SearchViewModel extends _$SearchViewModel {
       // loading state
       state = state.copyWith(searchState: SearchScreenStates.LOADING);
       // demo have 2 sec delay
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       // get search result
       final result = await _homeRepository.getSearchResults(query);
 

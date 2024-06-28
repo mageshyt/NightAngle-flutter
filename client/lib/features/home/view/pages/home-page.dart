@@ -7,7 +7,6 @@ import 'package:nightAngle/features/home/view/pages/library-page.dart';
 
 import 'package:nightAngle/features/search/view/page/search-page.dart';
 import 'package:nightAngle/features/home/view/pages/songs-page.dart';
-import 'package:nightAngle/features/home/view/pages/upload-song-page.dart';
 import 'package:nightAngle/features/home/view/widgets/music-slab.dart';
 
 class HomePage extends ConsumerStatefulWidget {
