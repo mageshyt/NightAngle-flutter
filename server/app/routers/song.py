@@ -170,7 +170,7 @@ async def search_songs(query: str = Query(..., min_length=1)):
             }
         )
         if not songs:
-            raise HTTPException(status_code=404, detail="No songs found")
+            return []
         return songs
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
