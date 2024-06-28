@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status, Depends, UploadFile, File, Form
+from fastapi import APIRouter, HTTPException, status, Depends, UploadFile, File, Form,Query
 import uuid
 
 from ..middleware.auth_middleware import auth_middleware
@@ -152,6 +152,28 @@ async def get_user_songs(user_id: str):
 
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+
+@router.get('/search')
+async def search_songs(query: str = Query(..., min_length=1)):
+    """
+    Search songs.
+    """
+    try:
+        songs = await prisma.songs.find_many(
+            where={
+                'OR': [
+                    {'song_name': {'contains': query, 'mode': 'insensitive'}},
+                    {'artist': {'contains': query, 'mode': 'insensitive'}},
+
+                ]
+
+            }
+        )
+        if not songs:
+            raise HTTPException(status_code=404, detail="No songs found")
+        return songs
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post('/upload')
