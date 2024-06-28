@@ -67,7 +67,7 @@ class SongsCard extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    song.song_name,
+                    truncate(song.song_name, 10),
                     style: const TextStyle(
                       color: Pallete.white,
                       fontSize: Sizes.fontSizeMd,

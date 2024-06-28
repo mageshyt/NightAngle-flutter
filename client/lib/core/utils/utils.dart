@@ -13,6 +13,11 @@ Color hexToColor(String hexString) {
   return Color(int.parse(buffer.toString(), radix: 16));
 }
 
+String truncate(String text, int length) {
+  if (text.length <= length) return text;
+  return '${text.substring(0, length)}...';
+}
+
 void pickAudio() async {
   try {
     final filePickerRes =
