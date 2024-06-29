@@ -110,6 +110,7 @@ class HomeViewModel extends _$HomeViewModel {
   }
 
   AsyncValue _favSongSuccess(bool isFavorited, String songId) {
+
     final userNotifier = ref.read(currentUserNotifierProvider.notifier);
     final currentUser = ref.read(currentUserNotifierProvider);
 

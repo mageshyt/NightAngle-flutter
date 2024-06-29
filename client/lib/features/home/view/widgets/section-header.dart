@@ -4,10 +4,12 @@ import 'package:nightAngle/core/core.dart';
 class SectionHeader extends StatelessWidget {
   final String title;
   final Function() onTap;
+  final bool? isMoreVisible;
   const SectionHeader({
     super.key,
     required this.title,
     required this.onTap,
+    this.isMoreVisible = true,
   });
 
   @override
@@ -31,17 +33,18 @@ class SectionHeader extends StatelessWidget {
               ]),
         ),
         const Spacer(),
-        Button(
-          onPressed: onTap,
-          variant: ButtonVariant.ghost,
-          label: const Text(
-            'View All',
-            style: TextStyle(
-              color: Pallete.subtitleText,
-              fontSize: Sizes.fontSizesm,
+        if (isMoreVisible!)
+          Button(
+            onPressed: onTap,
+            variant: ButtonVariant.ghost,
+            label: const Text(
+              'View All',
+              style: TextStyle(
+                color: Pallete.subtitleText,
+                fontSize: Sizes.fontSizesm,
+              ),
             ),
           ),
-        ),
       ],
     );
   }

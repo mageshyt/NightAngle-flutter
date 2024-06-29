@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:nightAngle/core/constants/constants.dart';
 import 'package:nightAngle/core/core.dart';
@@ -98,7 +99,7 @@ class MusicPlayer extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              song.song_name,
+                              truncate(song.song_name, 12),
                               style: TextStyles.songTitle,
                             ),
                             // ----------------------- artist
@@ -142,6 +143,70 @@ class MusicPlayer extends ConsumerWidget {
                               color: Pallete.white),
                           onPressed: () {
                             // create a playlist
+                            showMaterialModalBottomSheet(
+                              context: context,
+                              expand: false,
+                              settings: const RouteSettings(name: 'playlist'),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
+                              builder: (context) => Container(
+                                height: 300,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: Sizes.lg, vertical: Sizes.sm),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: Sizes.spaceBtwItems,
+                                    ),
+                                    // ----------------- create playlist----------------
+                                    const Text(
+                                      'Your Playlist',
+                                      style: TextStyle(
+                                        color: Pallete.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+
+                                    // ----------------- Already playlist----------------
+
+                                    // ----------------- create playlist----------------
+
+                                    const SizedBox(
+                                      height: Sizes.spaceBtwItems,
+                                    ),
+
+                                    ListTile(
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        // create a playlist
+                                      },
+                                      leading: const Icon(
+                                        CupertinoIcons.add,
+                                        color: Pallete.white,
+                                      ),
+                                      title: const Text(
+                                        'Create Playlist',
+                                        style: TextStyle(
+                                          color: Pallete.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
                           },
                         )
                       ],

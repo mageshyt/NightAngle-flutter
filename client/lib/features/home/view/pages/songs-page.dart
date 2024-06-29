@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,6 +31,12 @@ class SongsPage extends ConsumerWidget {
 
             const SizedBox(height: Sizes.spaceBtwSections),
 
+            SectionHeader(
+              title: 'Recently Played ',
+              onTap: () {},
+              isMoreVisible: false,
+            ),
+            const SizedBox(height: Sizes.spaceBtwItems),
             // Recent played section
             const RecentlyPlayedSong(),
             // Songs section
