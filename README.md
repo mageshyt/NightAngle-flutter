@@ -120,13 +120,23 @@ flutter run
 
 ## Screenshots
 
-![Login](/assets/login.png)
-![Register](/assets/register.png)
-![Home](/assets/home.png)
-![Home 2](/assets/home-2.png)
-![Music Player](/assets/music-player.png)
-![Upload](/assets/upload.png)
-![Search](/assets/search.png)
+<table>
+  <tr>
+    <td><img src="/assets/login.png" alt="Login" style="width: 100%;"></td>
+    <td><img src="/assets/register.png" alt="Register" style="width: 100%;"></td>
+  </tr>
+  <tr>
+    <td><img src="/assets/home.png" alt="Home" style="width: 100%;"></td>
+    <td><img src="/assets/home-2.png" alt="Home 2" style="width: 100%;"></td>
+  </tr>
+  <tr>
+    <td><img src="/assets/music-player.png" alt="Music Player" style="width: 100%;"></td>
+    <td><img src="/assets/upload.png" alt="Upload" style="width: 100%;"></td>
+  </tr>
+  <tr>
+    <td><img src="/assets/search.png" alt="Search" style="width: 100%;"></td>
+  </tr>
+</table>
 
 ## Technologies Used
 
