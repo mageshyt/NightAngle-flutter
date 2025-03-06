@@ -9,7 +9,7 @@ import 'package:nightAngle/features/home/view/pages/upload-song-page.dart';
 class AppRouter {
   static GoRouter returnRouter(bool isAuth) {
     GoRouter router = GoRouter(
-      initialLocation: '/login',
+      initialLocation: '/register',
       routes: [
         // Define a default route p
         GoRoute(
