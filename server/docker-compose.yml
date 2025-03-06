@@ -1,15 +1,34 @@
-version: "1"
 services:
-  postgres:
-    container_name: db
-    restart: always
-    image: postgres:latest
-
+  api:
+    container_name: nightangle_api
+    build: .
     ports:
-      - 5432:5432
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:bablu007@db:5432/nightangle
+      - JWT_SECRET=your_jwt_secret_key
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+    depends_on:
+      - db
+    volumes:
+      - ./app:/code/app
+    restart: always
+
+  db:
+    container_name: nightangle_db
+    image: postgres:latest
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_DB: nightangle
       POSTGRES_USER: user
       POSTGRES_PASSWORD: bablu007
       POSTGRES_HOST: db
       POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:

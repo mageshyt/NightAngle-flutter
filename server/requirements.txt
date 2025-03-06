@@ -1,0 +1,11 @@
+fastapi[all]>=0.113.0,<0.114.0
+pydantic>=2.7.0,<3.0.0
+prisma>=0.13.0
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+python-dotenv
+uvicorn
+cloudinary
+bcrypt 
+pyjwt
