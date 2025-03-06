@@ -37,6 +37,14 @@ dependencies:
   google_fonts: ^6.2.1
   neon: ^0.1.0
   animate_do: ^3.3.4
+  talker_dio_logger: ^4.3.0
+  talker_flutter: ^4.3.0
+  hive: ^4.0.0-dev.2
+  isar_flutter_libs: ^4.0.0-dev.13
+  path_provider: ^2.1.0
+  just_audio_background: ^0.0.1-beta.12
+  swipe: ^0.0.1
+  modal_bottom_sheet: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +61,7 @@ dev_dependencies:
   just_audio: ^0.9.38
   just_audio_cache: ^0.1.2
   cached_network_image: ^3.3.1
+  just_audio_background: ^0.0.1-beta.12
 
 flutter:
   uses-material-design: true
@@ -61,3 +70,4 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/animations/

@@ -73,6 +73,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  audio_service:
+    dependency: transitive
+    description:
+      name: audio_service
+      sha256: "4547c312a94f9cb2c48b60823fb190767cbd63454a83c73049384d5d3cba4650"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.13"
+  audio_service_platform_interface:
+    dependency: transitive
+    description:
+      name: audio_service_platform_interface
+      sha256: "8431a455dac9916cc9ee6f7da5620a666436345c906ad2ebb7fa41d18b3c1bf4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
+  audio_service_web:
+    dependency: transitive
+    description:
+      name: audio_service_web
+      sha256: "9d7d5ae5f98a5727f2580fad73062f2484f400eef6cef42919413268e62a363e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
   audio_session:
     dependency: transitive
     description:
@@ -629,6 +653,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  group_button:
+    dependency: transitive
+    description:
+      name: group_button
+      sha256: "0610fcf28ed122bfb4b410fce161a390f7f2531d55d1d65c5375982001415940"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.4"
+  hive:
+    dependency: "direct main"
+    description:
+      name: hive
+      sha256: "10819524df282842ebae12870e2e0e9ebc3e5c4637bec741ad39b919c589cb20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0-dev.2"
   hotreloader:
     dependency: transitive
     description:
@@ -757,6 +797,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  isar:
+    dependency: transitive
+    description:
+      name: isar
+      sha256: ebf74d87c400bd9f7da14acb31932b50c2407edbbd40930da3a6c2a8143f85a8
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0-dev.14"
+  isar_flutter_libs:
+    dependency: "direct main"
+    description:
+      name: isar_flutter_libs
+      sha256: "04a3f4035e213ddb6e78d0132a7c80296a085c2088c2a761b4a42ee5add36983"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0-dev.14"
   js:
     dependency: transitive
     description:
@@ -781,6 +837,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.38"
+  just_audio_background:
+    dependency: "direct main"
+    description:
+      name: just_audio_background
+      sha256: "0a8815284b22756d447c9d616d6c4c022dfcc390f23814b637ef891e51279c69"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1-beta.12"
   just_audio_cache:
     dependency: "direct dev"
     description:
@@ -901,6 +965,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  modal_bottom_sheet:
+    dependency: "direct main"
+    description:
+      name: modal_bottom_sheet
+      sha256: eac66ef8cb0461bf069a38c5eb0fa728cee525a531a8304bd3f7b2185407c67e
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   neon:
     dependency: "direct main"
     description:
@@ -958,7 +1030,7 @@ packages:
     source: hosted
     version: "1.0.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: c9e7d3a4cd1410877472158bee69963a4579f78b68c65a2b7d40d1a7a88bb161
@@ -1133,6 +1205,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  share_plus:
+    dependency: transitive
+    description:
+      name: share_plus
+      sha256: ef3489a969683c4f3d0239010cc8b7a2a46543a8d139e111c06c558875083544
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.0.0"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      sha256: "0f9e4418835d1b2c3ae78fdb918251959106cefdbc4dd43526e182f80e82f6d4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   shared_preferences:
     dependency: transitive
     description:
@@ -1290,6 +1378,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  swipe:
+    dependency: "direct main"
+    description:
+      name: swipe
+      sha256: e2f823093ef0161698cc380f5f868a6be380cb5c90c1c0ddc7fa2b0a7eadfa0e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   synchronized:
     dependency: transitive
     description:
@@ -1298,6 +1394,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0+1"
+  talker:
+    dependency: transitive
+    description:
+      name: talker
+      sha256: be2b3987fc64eb4eeb3c738cc89189eab49a36348c7b7bcf0e4fbf1473c913e9
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.0"
+  talker_dio_logger:
+    dependency: "direct main"
+    description:
+      name: talker_dio_logger
+      sha256: "050fd2e2494aeca90e9bb77caef507ab43758c9cda617ea2f2f022cd6195ff86"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.0"
+  talker_flutter:
+    dependency: "direct main"
+    description:
+      name: talker_flutter
+      sha256: "736d52a701a790d914fbc2260e94375b23076f2218f8741bcfa445113a9af363"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.0"
+  talker_logger:
+    dependency: transitive
+    description:
+      name: talker_logger
+      sha256: "5837cf93cf2e37016c68da19536033ffc2af2ef0c12e33e926321fd20060d105"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.0"
   term_glyph:
     dependency: transitive
     description:
@@ -1338,6 +1466,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
+  url_launcher_linux:
+    dependency: transitive
+    description:
+      name: url_launcher_linux
+      sha256: ab360eb661f8879369acac07b6bb3ff09d9471155357da8443fd5d3cf7363811
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
+  url_launcher_platform_interface:
+    dependency: transitive
+    description:
+      name: url_launcher_platform_interface
+      sha256: "552f8a1e663569be95a8190206a38187b531910283c3e982193e4f2733f01029"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      sha256: "8d9e750d8c9338601e709cd0885f95825086bd8b642547f26bda435aade95d8a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
+  url_launcher_windows:
+    dependency: transitive
+    description:
+      name: url_launcher_windows
+      sha256: ecf9725510600aa2bb6d7ddabe16357691b6d2805f66216a97d1b881e21beff7
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   uuid:
     dependency: transitive
     description:

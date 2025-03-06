@@ -6,6 +6,18 @@ String rgbToHex(Color color) {
   return '#${color.red.toRadixString(16).padLeft(2, '0')}';
 }
 
+Color hexToColor(String hexString) {
+  final buffer = StringBuffer();
+  if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+  buffer.write(hexString.replaceFirst('#', ''));
+  return Color(int.parse(buffer.toString(), radix: 16));
+}
+
+String truncate(String text, int length) {
+  if (text.length <= length) return text;
+  return '${text.substring(0, length)}...';
+}
+
 void pickAudio() async {
   try {
     final filePickerRes =

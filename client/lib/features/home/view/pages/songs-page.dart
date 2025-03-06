@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:nightAngle/core/core.dart';
 import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:nightAngle/features/home/view/widgets/section-header.dart';
+import 'package:nightAngle/features/home/view/widgets/songs-page/recently-played-song.dart';
 import 'package:nightAngle/features/home/view/widgets/songs-page/songs-card.dart';
 
 import 'package:nightAngle/features/home/view/widgets/songs-page/songs-page-header.dart';
@@ -28,16 +28,25 @@ class SongsPage extends ConsumerWidget {
             // Header section
 
             SongsPageHeader(user: user),
+
             const SizedBox(height: Sizes.spaceBtwSections),
 
+            SectionHeader(
+              title: 'Recently Played ',
+              onTap: () {},
+              isMoreVisible: false,
+            ),
+            const SizedBox(height: Sizes.spaceBtwItems),
+            // Recent played section
+            const RecentlyPlayedSong(),
             // Songs section
 
             SectionHeader(
-              title: 'Your Songs',
+              title: 'Most Played ',
               onTap: () {},
             ),
 
-            ref.watch(getCurrentUserSongsProvider).when(
+            ref.watch(getTopSongsProvider).when(
                   loading: () => const Center(child: Loader()),
                   error: (error, stackTrace) => Center(
                     child: Text('Error: $error'),
@@ -50,7 +59,9 @@ class SongsPage extends ConsumerWidget {
                       itemBuilder: (context, index) {
                         final song = songs[index];
                         return FadeIn(
-                          delay: Duration(milliseconds: 500 * index),
+                          delay:
+                              Duration(milliseconds: 250 * (index / 2).round()),
+                          manualTrigger: false,
                           child: SongsCard(song: song),
                         );
                       },

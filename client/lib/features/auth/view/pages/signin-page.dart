@@ -41,7 +41,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 message: Texts.loginSuccess,
                 contentType: ContentType.success);
             // navigate to home page
-            context.goNamed(Routes.home);
+            context.go(Routes.home);
           },
           error: (err, stack) {
             showSnackbar(
@@ -124,8 +124,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                LoggerHelper.debug('clicking');
-                                context.goNamed(Routes.register);
+                                context.go(Routes.register);
                               },
                             text: ' Sign Up',
                             style: const TextStyle(

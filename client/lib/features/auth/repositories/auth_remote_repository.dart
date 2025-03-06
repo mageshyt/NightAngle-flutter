@@ -92,7 +92,7 @@ class AuthRemoteRepository {
     try {
       final response = await APIService.instance
           .request('/auth/me', DioMethod.get, headers: {'x-auth-token': token});
-
+      LoggerHelper.debug(response.toString());
       if (response.statusCode != 200) {
         return Left(HttpFailure(
           message: response.data['detail'],
@@ -104,10 +104,8 @@ class AuthRemoteRepository {
       return Right(user.copyWith(token: token));
     } catch (e) {
       if (e is DioException) {
-        LoggerHelper.error(e.response.toString());
-        return Left(HttpFailure(
-            message: e.response!.data['detail'],
-            code: e.response!.statusCode.toString()));
+        // LoggerHelper.error(e.response.toString());
+        return Left(HttpFailure(message: "Something went wrong", code: '500'));
       }
 
       return Left(HttpFailure(message: e.toString(), code: '500'));

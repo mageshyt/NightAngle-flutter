@@ -54,7 +54,7 @@ class Sizes {
   static const double dividerHeight = 1.0;
 
   // Product item dimensions
-  static const double productImageSize = 120.0;
+  static const double productImageSize = 300.0;
   static const double productImageRadius = 16.0;
   static const double productItemHeight = 160.0;
 
@@ -76,6 +76,7 @@ class Sizes {
 
   // Image carousel height
   static const double imageCarouselHeight = 200.0;
+  static const double imageSm = 60;
 
   // Loading indicator size
   static const double loadingIndicatorSize = 36.0;

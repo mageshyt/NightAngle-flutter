@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:nightAngle/core/core.dart';
+import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
+import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
+import 'package:talker/talker.dart';
 
 enum DioMethod { post, get, put, delete }
 
@@ -31,6 +34,18 @@ class APIService {
       if (isAuthorized == true) {
         dio.interceptors.add(AuthHeaderIntro());
       }
+
+      dio.interceptors.add(TalkerDioLogger(
+          settings: TalkerDioLoggerSettings(
+        printRequestHeaders: true,
+        printResponseHeaders: true,
+        printResponseMessage: true, // Blue http requests logs in console
+        requestPen: AnsiPen()..blue(),
+        // Green http responses logs in console
+        responsePen: AnsiPen()..green(),
+        // Error http logs in console
+        errorPen: AnsiPen()..red(),
+      )));
 
       switch (method) {
         case DioMethod.post:

@@ -10,6 +10,7 @@ enum ButtonVariant {
   secondary,
   ghost,
   link,
+  icon,
 }
 
 enum ButtonSize {
@@ -60,6 +61,8 @@ class Button extends StatelessWidget {
           style: mergedStyle,
           child: _buildChild(),
         );
+      case ButtonVariant.icon:
+        return IconButton(onPressed: onPressed, icon: icon!);
       default:
         return ElevatedButton(
           onPressed: onPressed,

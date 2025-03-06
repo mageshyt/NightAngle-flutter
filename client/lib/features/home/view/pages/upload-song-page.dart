@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -40,7 +41,9 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
           Validators.required,
         ]),
     'color': FormControl<Color?>(
-        value: Pallete.primary, validators: [Validators.required]),
+      value: Pallete.primary,
+      validators: [Validators.required],
+    ),
   });
 
   @override
@@ -65,7 +68,7 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
 
                 if (!form.valid) {
                   form.markAllAsTouched();
-                  return;
+                  // return;/
                 }
                 await ref.read(homeViewModelProvider.notifier).uploadSong(
                       selectedAudio: File(
@@ -86,7 +89,9 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
 
                 // remove the errors
 
-                // form.reset();
+                // push to home page
+
+                GoRouter.of(context).pushNamed(RoutesName.home);
               },
             )
           ],

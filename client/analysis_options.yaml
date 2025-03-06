@@ -25,6 +25,8 @@ linter:
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 
 analyzer:
+  errors:
+    file_names: ignore
   plugins:
     - custom_lint
 # Additional information about this file can be found at

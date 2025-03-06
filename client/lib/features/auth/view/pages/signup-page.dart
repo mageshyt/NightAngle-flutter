@@ -50,8 +50,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 title: 'Register',
                 message: Texts.registerSuccess,
                 contentType: ContentType.success);
-            // navigate to home page
-            context.goNamed(Routes.home);
+            // navigate to login page
+            context.go(Routes.login);
           },
           error: (err, stack) {
             showSnackbar(
@@ -163,7 +163,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             TextSpan(
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  context.goNamed(Routes.login);
+                                  context.go(Routes.login);
                                 },
                               text: ' login',
                               style: const TextStyle(

@@ -35,5 +35,12 @@ class AppTheme {
       elevation: 0,
       enableFeedback: false,
     ),
+    // sliderTheme: SliderThemeData(
+    //   activeTrackColor: Pallete.primary,
+    //   inactiveTrackColor: Pallete.white.withOpacity(0.117),
+    //   thumbColor: Pallete.primary,
+    //   trackHeight: 4,
+    //   overlayShape: SliderComponentShape.noOverlay,
+    // )
   );
 }

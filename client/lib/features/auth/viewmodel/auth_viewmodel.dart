@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:nightAngle/core/http/failure.dart';
 import 'package:nightAngle/core/logger/logger.dart';
 import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:nightAngle/features/auth/model/user-model.dart';
@@ -30,7 +31,7 @@ class AuthViewModel extends _$AuthViewModel {
     // call the register method from the repository
     final res = await _authRemoteRepository.register(
         email: email, password: password, name: name);
-
+    LoggerHelper.error('ERROR ' + res.toString());
     final val = switch (res) {
       Left(value: final l) => state =
           AsyncValue.error(l.message, StackTrace.current),
@@ -75,12 +76,20 @@ class AuthViewModel extends _$AuthViewModel {
     final res = await _authRemoteRepository.getCurrentUser(token);
 
     final val = switch (res) {
-      Left(value: final l) => state =
-          AsyncValue.error(l.message, StackTrace.current),
+      Left(value: final l) => _handleFailure(l),
       Right(value: final r) => _getDataSuccess(r),
     };
-    LoggerHelper.debug(ref.read(currentUserNotifierProvider).toString());
-    return val.hasError ? null : val.value;
+
+    return val?.when(
+      data: (data) => data,
+      loading: () => null,
+      error: (error, stackTrace) => null,
+    );
+  }
+
+  AsyncValue<UserModel>? _handleFailure(HttpFailure failure) {
+    _currentUserNotifier.removeUser();
+    return state = AsyncValue.error(failure.message, StackTrace.current);
   }
 
   AsyncValue<UserModel> _getDataSuccess(UserModel user) {
