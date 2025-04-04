@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:nightAngle/core/constants/constants.dart';
 import 'package:nightAngle/core/providers/current_user_notifier.dart';
 import 'package:nightAngle/core/widgets/toast.dart';
 import 'package:nightAngle/features/home/models/fav-song-model.dart';
@@ -110,7 +111,6 @@ class HomeViewModel extends _$HomeViewModel {
   }
 
   AsyncValue _favSongSuccess(bool isFavorited, String songId) {
-
     final userNotifier = ref.read(currentUserNotifierProvider.notifier);
     final currentUser = ref.read(currentUserNotifierProvider);
 
@@ -145,5 +145,28 @@ class HomeViewModel extends _$HomeViewModel {
 
   List<SongModel> getRecentlyPlayedSong() {
     return _homeLocalRepository.getLocalSongs();
+  }
+
+  Future<void> logout(BuildContext context) async {
+    state = const AsyncValue.loading();
+
+    try {
+      // Clear current user from provider
+      ref.read(currentUserNotifierProvider.notifier).removeUser();
+
+      // Reset all relevant providers
+      ref.invalidate(getFavoriteSongsProvider);
+      ref.invalidate(getCurrentUserSongsProvider);
+
+      // Show success message
+      toast.showSuccessToast(
+          context: context, message: "Logged out successfully");
+
+      state = const AsyncValue.data(null);
+    } catch (e) {
+      state = AsyncValue.error(e.toString(), StackTrace.current);
+      toast.showErrorToast(
+          context: context, message: "Failed to logout: ${e.toString()}");
+    }
   }
 }
