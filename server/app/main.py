@@ -94,7 +94,7 @@ async def root():
             </div>
             
             <footer>
-                <p>NightAngle Music Streaming - &copy; 2023</p>
+                <p>NightAngle Music Streaming - &copy; 2024</p>
             </footer>
         </body>
     </html>
